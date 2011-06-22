@@ -39,6 +39,14 @@
             <param term='custom'>Array of parameters that are host application specific.</param>
             <seealso class='IDTExtensibility2' />
         </member>
+        <member name="M:OutputColorer.OutputClassifier.GetClassificationSpans(Microsoft.VisualStudio.Text.SnapshotSpan)">
+            <summary>
+            Classify the given spans, which, for diff files, classifies
+            a line at a time.
+            </summary>
+            <param name="span">The span of interest in this projection buffer.</param>
+            <returns>The list of <see cref="T:Microsoft.VisualStudio.Text.Classification.ClassificationSpan"/> as contributed by the source buffers.</returns>
+        </member>
         <member name="M:OutputColorer.BuildOutputClassifier.GetClassificationSpans(Microsoft.VisualStudio.Text.SnapshotSpan)">
             <summary>
             Classify the given spans, which, for diff files, classifies

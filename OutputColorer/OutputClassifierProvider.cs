@@ -12,22 +12,22 @@ namespace OutputColorer
     [Export(typeof(IClassifierProvider))]    
     public class OutputClassifierProvider : IClassifierProvider
     {
-        private const string OutputContentType = "Output";
+        private const string DebugOutputContentType = "DebugOutput";
         private const string BuildOutputContentType = "BuildOutput";
 
         [Import]
         internal IClassificationTypeRegistryService ClassificationRegistry;
 
         private static BuildOutputClassifier _buildOutputClassifier;
-        private static OutputClassifier _outputClassifier;
+        private static OutputClassifier _debugOutputClassifier;
        
         public IClassifier GetClassifier(ITextBuffer buffer)
         {
             if (buffer.ContentType.IsOfType(BuildOutputContentType))
                 return _buildOutputClassifier ?? (_buildOutputClassifier = new BuildOutputClassifier(ClassificationRegistry));
 
-            if (buffer.ContentType.IsOfType(OutputContentType))
-                return _outputClassifier ?? (_outputClassifier = new OutputClassifier(ClassificationRegistry));
+            if (buffer.ContentType.IsOfType(DebugOutputContentType))
+                return _debugOutputClassifier ?? (_debugOutputClassifier = new OutputClassifier(ClassificationRegistry));
 
             return null;
         }

@@ -9,8 +9,8 @@ namespace OutputColorer
 {
     public class OutputClassifierDefinitions
     {
-        internal const string BuildFailed = "output.build.failed";
-        internal const string BuildWarning = "output.build.warning";
+        internal const string Error = "output.error";
+        internal const string Warning = "output.warning";
 
         [Export]
         [Name("output")]
@@ -18,32 +18,32 @@ namespace OutputColorer
         internal static ContentTypeDefinition OutputContentTypeDefinition;
 
         [Export]
-        [Name(BuildWarning)]
+        [Name(Warning)]
         [BaseDefinition("output")]
         internal static ClassificationTypeDefinition BuildWarningDefinition;
 
         [Export]
-        [Name(BuildFailed)]
+        [Name(Error)]
         [BaseDefinition("output")]
-        internal static ClassificationTypeDefinition BuildFailedDefinition;        
+        internal static ClassificationTypeDefinition BuildFailedDefinition;
 
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = BuildWarning)]
-        [Name(BuildWarning)]
-        internal sealed class BuildWarningFormat : ClassificationFormatDefinition
+        [ClassificationType(ClassificationTypeNames = Warning)]
+        [Name(Warning)]
+        internal sealed class OutputWarningFormat : ClassificationFormatDefinition
         {
-            public BuildWarningFormat()
+            public OutputWarningFormat()
             {
                 ForegroundColor = Color.FromRgb(0x44, 0xBB, 0xBB);
             }
         }
 
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = BuildFailed)]
-        [Name(BuildFailed)]
-        internal sealed class BuildFailedFormat : ClassificationFormatDefinition
+        [ClassificationType(ClassificationTypeNames = Error)]
+        [Name(Error)]
+        internal sealed class OutputErrorFormat : ClassificationFormatDefinition
         {
-            public BuildFailedFormat()
+            public OutputErrorFormat()
             {
                 ForegroundColor = Colors.Red;
                 IsBold = true;

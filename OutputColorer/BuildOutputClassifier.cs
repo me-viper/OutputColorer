@@ -42,9 +42,9 @@ namespace OutputColorer
                 string text = line.GetText();
 
                 if (text.Contains("Failed"))
-                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.BuildFailed);
+                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
                 else if (text.Contains("warning"))
-                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.BuildWarning);
+                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Warning);
                 else
                     type = _classificationTypeRegistry.GetClassificationType("text");
                 

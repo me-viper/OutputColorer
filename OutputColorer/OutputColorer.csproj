@@ -60,6 +60,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BuildOutputClassifier.cs" />
+    <Compile Include="OutputClassifier.cs" />
     <Compile Include="OutputClassifierProvider.cs" />
     <Compile Include="OutputClassifierDefinitions.cs" />
   </ItemGroup>
