@@ -28,22 +28,29 @@ namespace OutputColorer
 
             var spans = new List<ClassificationSpan>();
 
-            if (snapshot.Length == 0)
-                return spans;
-            
-            IClassificationType type = null;
-            string text = span.GetText().TrimStart();
-
-            if (text.StartsWith("at") || 
-                text.StartsWith("A first chance exception of type") ||
-                text.Contains("--- End of inner exception stack trace ---") || 
-                text.Contains("Exception:"))
+            try
             {
-                type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
-            }
+                if (snapshot.Length == 0)
+                    return spans;
+            
+                IClassificationType type = null;
+                string text = span.GetText().TrimStart();
 
-            if (type != null)
-                spans.Add(new ClassificationSpan(span, type));
+                if (text.StartsWith("at") || 
+                    text.StartsWith("A first chance exception of type") ||
+                        text.Contains("--- End of inner exception stack trace ---") || 
+                            text.Contains("Exception:"))
+                {
+                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
+                }
+
+                if (type != null)
+                    spans.Add(new ClassificationSpan(span, type));
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Write(ex);
+            }
             
             return spans;
         }

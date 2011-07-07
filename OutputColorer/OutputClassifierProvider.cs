@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
@@ -23,6 +22,8 @@ namespace OutputColorer
        
         public IClassifier GetClassifier(ITextBuffer buffer)
         {
+            Logger.Instance.Trace("Output classifier initialized.");
+
             if (buffer.ContentType.IsOfType(BuildOutputContentType))
                 return _buildOutputClassifier ?? (_buildOutputClassifier = new BuildOutputClassifier(ClassificationRegistry));
 

@@ -29,27 +29,32 @@ namespace OutputColorer
 
             var spans = new List<ClassificationSpan>();
 
-            if(snapshot.Length == 0)
-                return spans;
-
-            var startno = span.Start.GetContainingLine().LineNumber;
-            var endno = (span.End - 1).GetContainingLine().LineNumber;
-
-            for (var i = startno; i <= endno; i++)
+            try
             {
-                ITextSnapshotLine line = snapshot.GetLineFromLineNumber(i);
-                IClassificationType type = null;
-                string text = line.GetText();
+                if(snapshot.Length == 0)
+                    return spans;
+            
+                var startno = span.Start.GetContainingLine().LineNumber;
+                var endno = (span.End - 1).GetContainingLine().LineNumber;
 
-                if (text.Contains("Failed"))
-                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
-                else if (text.Contains("warning"))
-                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Warning);
-                else
-                    type = _classificationTypeRegistry.GetClassificationType("text");
+                for (var i = startno; i <= endno; i++)
+                {
+                    ITextSnapshotLine line = snapshot.GetLineFromLineNumber(i);
+                    IClassificationType type = null;
+                    string text = line.GetText();
+
+                    if (text.Contains("Failed"))
+                        type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
+                    else if (text.Contains("warning"))
+                        type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Warning);
                 
-                if (type != null)
-                    spans.Add(new ClassificationSpan(line.Extent, type));
+                    if (type != null)
+                        spans.Add(new ClassificationSpan(line.Extent, type));
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Write(ex);
             }
 
             return spans;

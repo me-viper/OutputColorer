@@ -41,8 +41,7 @@
         </member>
         <member name="M:OutputColorer.OutputClassifier.GetClassificationSpans(Microsoft.VisualStudio.Text.SnapshotSpan)">
             <summary>
-            Classify the given spans, which, for diff files, classifies
-            a line at a time.
+            Classify debug output spans.
             </summary>
             <param name="span">The span of interest in this projection buffer.</param>
             <returns>The list of <see cref="T:Microsoft.VisualStudio.Text.Classification.ClassificationSpan"/> as contributed by the source buffers.</returns>
