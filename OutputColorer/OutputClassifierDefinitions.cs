@@ -52,7 +52,7 @@ namespace OutputColorer
         {
             public OutputWarningFormat()
             {
-                ForegroundColor = Color.FromRgb(0x44, 0xBB, 0xBB);
+                ForegroundColor = Color.FromRgb(128, 128, 0);
             }
         }
 

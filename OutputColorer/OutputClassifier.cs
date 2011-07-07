@@ -51,7 +51,7 @@ namespace OutputColorer
                 {
                     type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Noise);
                 }
-                else if (Regex.IsMatch(text, @"^\'.+\'\s+(.+): Loaded \'.+\'$"))
+                else if (Regex.IsMatch(text, @"^\'.+\'\s+.+: Loaded.*$"))
                 {
                     type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Noise);
                 }                
