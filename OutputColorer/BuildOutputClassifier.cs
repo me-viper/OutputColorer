@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
@@ -43,11 +44,13 @@ namespace OutputColorer
                     IClassificationType type = null;
                     string text = line.GetText();
 
-                    if (text.Contains("Failed"))
+                    if (text.Contains("- Failed  -"))
                         type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
                     else if (text.Contains("- Success -"))
                         type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Success);
-                    else if (text.Contains("warning"))
+                    else if (Regex.IsMatch(text, @"^.+: error \w+:.+$"))
+                        type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);                    
+                    else if (Regex.IsMatch(text, @"^.+: warning \w+:.+$"))
                         type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Warning);
                 
                     if (type != null)

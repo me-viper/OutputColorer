@@ -22,8 +22,6 @@ namespace OutputColorer
        
         public IClassifier GetClassifier(ITextBuffer buffer)
         {
-            //Logger.Instance.Trace("Output classifier initialized.");
-
             if (buffer.ContentType.IsOfType(BuildOutputContentType))
                 return _buildOutputClassifier ?? (_buildOutputClassifier = new BuildOutputClassifier(ClassificationRegistry));
 
