@@ -45,6 +45,8 @@ namespace OutputColorer
 
                     if (text.Contains("Failed"))
                         type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
+                    else if (text.Contains("- Success -"))
+                        type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Success);
                     else if (text.Contains("warning"))
                         type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Warning);
                 

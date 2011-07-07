@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
@@ -36,13 +37,24 @@ namespace OutputColorer
                 IClassificationType type = null;
                 string text = span.GetText().TrimStart();
 
-                if (text.StartsWith("at") || 
-                    text.StartsWith("A first chance exception of type") ||
-                        text.Contains("--- End of inner exception stack trace ---") || 
-                            text.Contains("Exception:"))
+                if (text.Contains("--- End of inner exception stack trace ---"))
+                {
+                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.StackTrace);
+                }
+                else if (text.StartsWith("at") || 
+                            text.StartsWith("A first chance exception of type") || 
+                                text.Contains("Exception:"))
                 {
                     type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
                 }
+                else if (Regex.IsMatch(text, "^The (?:thread|program) .+ has exited with code .+$"))
+                {
+                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Noise);
+                }
+                else if (Regex.IsMatch(text, @"^\'.+\'\s+(.+): Loaded \'.+\'$"))
+                {
+                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Noise);
+                }                
 
                 if (type != null)
                     spans.Add(new ClassificationSpan(span, type));

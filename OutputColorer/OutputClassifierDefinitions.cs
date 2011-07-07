@@ -11,6 +11,9 @@ namespace OutputColorer
     {
         internal const string Error = "output.error";
         internal const string Warning = "output.warning";
+        internal const string Success = "output.success";
+        internal const string Noise = "output.noise";
+        internal const string StackTrace = "output.stacktrace";
 
         [Export]
         [Name("output")]
@@ -20,12 +23,27 @@ namespace OutputColorer
         [Export]
         [Name(Warning)]
         [BaseDefinition("output")]
-        internal static ClassificationTypeDefinition BuildWarningDefinition;
+        internal static ClassificationTypeDefinition WarningDefinition;
 
         [Export]
         [Name(Error)]
         [BaseDefinition("output")]
-        internal static ClassificationTypeDefinition BuildFailedDefinition;
+        internal static ClassificationTypeDefinition ErrorDefinition;
+
+        [Export]
+        [Name(StackTrace)]
+        [BaseDefinition("output")]
+        internal static ClassificationTypeDefinition StackTraceDefinition;
+
+        [Export]
+        [Name(Success)]
+        [BaseDefinition("output")]
+        internal static ClassificationTypeDefinition SuccessDefinition;
+
+        [Export]
+        [Name(Noise)]
+        [BaseDefinition("output")]
+        internal static ClassificationTypeDefinition NoiseDefinition;
 
         [Export(typeof(EditorFormatDefinition))]
         [ClassificationType(ClassificationTypeNames = Warning)]
@@ -48,6 +66,40 @@ namespace OutputColorer
                 ForegroundColor = Colors.Red;
                 IsBold = true;
             }
-        }        
+        }
+
+        [Export(typeof(EditorFormatDefinition))]
+        [ClassificationType(ClassificationTypeNames = StackTrace)]
+        [Name(StackTrace)]
+        internal sealed class OutputStackTraceFormat : ClassificationFormatDefinition
+        {
+            public OutputStackTraceFormat()
+            {
+                ForegroundColor = Color.FromRgb(100, 0, 0);
+            }
+        }
+
+        [Export(typeof(EditorFormatDefinition))]
+        [ClassificationType(ClassificationTypeNames = Success)]
+        [Name(Success)]
+        internal sealed class OutputSuccessFormat : ClassificationFormatDefinition
+        {
+            public OutputSuccessFormat()
+            {
+                ForegroundColor = Colors.Green;
+                IsBold = true;
+            }
+        }
+
+        [Export(typeof(EditorFormatDefinition))]
+        [ClassificationType(ClassificationTypeNames = Noise)]
+        [Name(Noise)]
+        internal sealed class OutputNoiseFormat : ClassificationFormatDefinition
+        {
+            public OutputNoiseFormat()
+            {
+                ForegroundColor = Colors.Gray;
+            }
+        } 
     }
 }

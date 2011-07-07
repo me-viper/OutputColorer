@@ -15,7 +15,7 @@ namespace OutputColorer
     {
         private const string PaneName = "OutputColorer";
 
-        private static Lazy<Logger> _instance = new Lazy<Logger>(() => new Logger(), LazyThreadSafetyMode.PublicationOnly);
+        private static Lazy<Logger> _instance = new Lazy<Logger>(() => new Logger(), LazyThreadSafetyMode.ExecutionAndPublication);
         private OutputWindowPane _loggerPane;
 
         private Logger()
