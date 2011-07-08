@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.Utilities;
 namespace OutputColorer
 {
     [ContentType("output")]
-    [Export(typeof(IClassifierProvider))]    
+    [Export(typeof(IClassifierProvider))]
     public class OutputClassifierProvider : IClassifierProvider
     {
         private const string DebugOutputContentType = "DebugOutput";

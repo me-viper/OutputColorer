@@ -20,7 +20,7 @@ namespace OutputColorer
 
         private Logger()
         {
-            var dte = (DTE2)Package.GetGlobalService(typeof(DTE));
+            var dte = Utility.GetService<DTE, DTE2>();
             var outputPanes = dte.ToolWindows.OutputWindow.OutputWindowPanes;
 
             _loggerPane = (

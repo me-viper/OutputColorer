@@ -149,8 +149,6 @@
     <ProjectReference Include="..\OutputColorer\OutputColorer.csproj">
       <Project>{68A54644-CA68-4157-89D8-710412B769C0}</Project>
       <Name>OutputColorer</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3b</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

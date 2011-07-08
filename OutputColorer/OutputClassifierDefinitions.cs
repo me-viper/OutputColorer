@@ -9,11 +9,11 @@ namespace OutputColorer
 {
     public class OutputClassifierDefinitions
     {
-        internal const string Error = "output.error";
-        internal const string Warning = "output.warning";
-        internal const string Success = "output.success";
-        internal const string Noise = "output.noise";
-        internal const string StackTrace = "output.stacktrace";
+        internal const string Error = "OutputColorer.Error";
+        internal const string Warning = "OutputColorer.Warning";
+        internal const string Success = "OutputColorer.Success";
+        internal const string Noise = "OutputColorer.Noise";
+        internal const string StackTrace = "OutputColorer.Delimiter";
 
         [Export]
         [Name("output")]
@@ -48,6 +48,7 @@ namespace OutputColorer
         [Export(typeof(EditorFormatDefinition))]
         [ClassificationType(ClassificationTypeNames = Warning)]
         [Name(Warning)]
+        [UserVisible(true)]
         internal sealed class OutputWarningFormat : ClassificationFormatDefinition
         {
             public OutputWarningFormat()
@@ -59,6 +60,7 @@ namespace OutputColorer
         [Export(typeof(EditorFormatDefinition))]
         [ClassificationType(ClassificationTypeNames = Error)]
         [Name(Error)]
+        [UserVisible(true)]
         internal sealed class OutputErrorFormat : ClassificationFormatDefinition
         {
             public OutputErrorFormat()
@@ -71,6 +73,7 @@ namespace OutputColorer
         [Export(typeof(EditorFormatDefinition))]
         [ClassificationType(ClassificationTypeNames = StackTrace)]
         [Name(StackTrace)]
+        [UserVisible(true)]
         internal sealed class OutputStackTraceFormat : ClassificationFormatDefinition
         {
             public OutputStackTraceFormat()
@@ -82,6 +85,7 @@ namespace OutputColorer
         [Export(typeof(EditorFormatDefinition))]
         [ClassificationType(ClassificationTypeNames = Success)]
         [Name(Success)]
+        [UserVisible(true)]
         internal sealed class OutputSuccessFormat : ClassificationFormatDefinition
         {
             public OutputSuccessFormat()
@@ -94,6 +98,7 @@ namespace OutputColorer
         [Export(typeof(EditorFormatDefinition))]
         [ClassificationType(ClassificationTypeNames = Noise)]
         [Name(Noise)]
+        [UserVisible(true)]
         internal sealed class OutputNoiseFormat : ClassificationFormatDefinition
         {
             public OutputNoiseFormat()
