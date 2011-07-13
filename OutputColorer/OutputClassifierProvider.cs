@@ -1,8 +1,10 @@
 using System;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
+using Microsoft.VisualStudio.TextManager.Interop;
 using Microsoft.VisualStudio.Utilities;
 
 namespace OutputColorer
@@ -13,7 +15,7 @@ namespace OutputColorer
     {
         private const string DebugOutputContentType = "DebugOutput";
         private const string BuildOutputContentType = "BuildOutput";
-
+        
         [Import]
         internal IClassificationTypeRegistryService ClassificationRegistry;
 

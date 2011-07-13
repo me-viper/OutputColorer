@@ -33,7 +33,7 @@ namespace OutputColorer
             {
                 if (snapshot.Length == 0)
                     return spans;
-            
+
                 IClassificationType type = null;
                 string text = span.GetText().TrimStart();
 
@@ -51,7 +51,7 @@ namespace OutputColorer
                 {
                     type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Noise);
                 }
-                else if (Regex.IsMatch(text, @"^\'.+\'\s+.+: Loaded.*$"))
+                else if (Regex.IsMatch(text, @"^\'.+\'\s+.+: (?:Loaded|Cannot find or open the PDB file).*$"))
                 {
                     type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Noise);
                 }                

@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Windows.Media;
 
 using Microsoft.VisualStudio.Text.Classification;
@@ -7,7 +8,7 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace OutputColorer
 {
-    public class OutputClassifierDefinitions
+    public static class OutputClassifierDefinitions
     {
         internal const string Error = "OutputColorer.Error";
         internal const string Warning = "OutputColorer.Warning";
@@ -16,36 +17,27 @@ namespace OutputColorer
         internal const string StackTrace = "OutputColorer.Delimiter";
 
         [Export]
-        [Name("output")]
-        [BaseDefinition("text")]
-        internal static ContentTypeDefinition OutputContentTypeDefinition;
-
-        [Export]
         [Name(Warning)]
-        [BaseDefinition("output")]
         internal static ClassificationTypeDefinition WarningDefinition;
 
         [Export]
         [Name(Error)]
-        [BaseDefinition("output")]
         internal static ClassificationTypeDefinition ErrorDefinition;
 
         [Export]
         [Name(StackTrace)]
-        [BaseDefinition("output")]
         internal static ClassificationTypeDefinition StackTraceDefinition;
 
         [Export]
         [Name(Success)]
-        [BaseDefinition("output")]
         internal static ClassificationTypeDefinition SuccessDefinition;
 
         [Export]
         [Name(Noise)]
-        [BaseDefinition("output")]
-        internal static ClassificationTypeDefinition NoiseDefinition;
+        internal static ClassificationTypeDefinition NoiseDefinition;        
 
         [Export(typeof(EditorFormatDefinition))]
+        [Order(Before = Priority.Default)]
         [ClassificationType(ClassificationTypeNames = Warning)]
         [Name(Warning)]
         [UserVisible(true)]
@@ -53,11 +45,13 @@ namespace OutputColorer
         {
             public OutputWarningFormat()
             {
+                ForegroundCustomizable = true;
                 ForegroundColor = Color.FromRgb(128, 128, 0);
             }
         }
 
         [Export(typeof(EditorFormatDefinition))]
+        [Order(Before = Priority.Default)]
         [ClassificationType(ClassificationTypeNames = Error)]
         [Name(Error)]
         [UserVisible(true)]
@@ -71,6 +65,7 @@ namespace OutputColorer
         }
 
         [Export(typeof(EditorFormatDefinition))]
+        [Order(Before = Priority.Default)]
         [ClassificationType(ClassificationTypeNames = StackTrace)]
         [Name(StackTrace)]
         [UserVisible(true)]
@@ -78,11 +73,13 @@ namespace OutputColorer
         {
             public OutputStackTraceFormat()
             {
+                ForegroundCustomizable = true;
                 ForegroundColor = Color.FromRgb(100, 0, 0);
             }
         }
 
         [Export(typeof(EditorFormatDefinition))]
+        [Order(Before = Priority.Default)]
         [ClassificationType(ClassificationTypeNames = Success)]
         [Name(Success)]
         [UserVisible(true)]
@@ -90,14 +87,17 @@ namespace OutputColorer
         {
             public OutputSuccessFormat()
             {
+                ForegroundCustomizable = true;
                 ForegroundColor = Colors.Green;
                 IsBold = true;
             }
         }
 
         [Export(typeof(EditorFormatDefinition))]
+        [Order(Before = Priority.Default)]
         [ClassificationType(ClassificationTypeNames = Noise)]
         [Name(Noise)]
+        [DisplayName(Noise)]
         [UserVisible(true)]
         internal sealed class OutputNoiseFormat : ClassificationFormatDefinition
         {
