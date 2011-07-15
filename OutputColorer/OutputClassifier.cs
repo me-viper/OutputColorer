@@ -41,6 +41,10 @@ namespace OutputColorer
                 {
                     type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.StackTrace);
                 }
+                else if (text.StartsWith("System.Windows.Data Error:"))
+                {
+                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
+                }
                 else if (text.StartsWith("at") || 
                             text.StartsWith("A first chance exception of type") || 
                                 text.Contains("Exception:"))

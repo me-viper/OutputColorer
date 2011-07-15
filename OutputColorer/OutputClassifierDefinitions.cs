@@ -1,14 +1,20 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Media;
 
+using Microsoft.Internal.VisualStudio.PlatformUI;
+using Microsoft.VisualStudio;
+using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
+using Color = System.Windows.Media.Color;
+
 namespace OutputColorer
 {
-    public static class OutputClassifierDefinitions
+    internal class OutputClassifierDefinitions
     {
         internal const string Error = "OutputColorer.Error";
         internal const string Warning = "OutputColorer.Warning";
@@ -34,77 +40,88 @@ namespace OutputColorer
 
         [Export]
         [Name(Noise)]
-        internal static ClassificationTypeDefinition NoiseDefinition;        
+        internal static ClassificationTypeDefinition NoiseDefinition;
 
-        [Export(typeof(EditorFormatDefinition))]
-        [Order(Before = Priority.Default)]
-        [ClassificationType(ClassificationTypeNames = Warning)]
-        [Name(Warning)]
-        [UserVisible(true)]
-        internal sealed class OutputWarningFormat : ClassificationFormatDefinition
+        internal class OutputColorerFormat : ClassificationFormatDefinition
         {
-            public OutputWarningFormat()
+            protected OutputColorerFormat(
+                string displayName,
+                Color? defaultForegroundColor) : this(displayName, defaultForegroundColor, Colors.White)
             {
-                ForegroundCustomizable = true;
-                ForegroundColor = Color.FromRgb(128, 128, 0);
+            }
+
+            protected OutputColorerFormat(
+                string displayName, 
+                Color? defaultForegroundColor,
+                Color? defaultBackgroundColor)
+            {
+                DisplayName = displayName;
+                
+                var formatInfo = OutputClassifierProvider.GetFontAndColor(displayName);
+                ForegroundColor = formatInfo.ForegroundColor ?? defaultForegroundColor;
+                BackgroundColor = formatInfo.BackGroundColor ?? defaultBackgroundColor;
+                IsBold = formatInfo.IsBold;
             }
         }
 
         [Export(typeof(EditorFormatDefinition))]
         [Order(Before = Priority.Default)]
-        [ClassificationType(ClassificationTypeNames = Error)]
-        [Name(Error)]
+        [ClassificationType(ClassificationTypeNames = OutputClassifierDefinitions.Warning)]
+        [Name(OutputClassifierDefinitions.Warning)]
         [UserVisible(true)]
-        internal sealed class OutputErrorFormat : ClassificationFormatDefinition
+        internal sealed class OutputWarningFormat : OutputColorerFormat
         {
-            public OutputErrorFormat()
+            public OutputWarningFormat() : base(Warning, Color.FromRgb(128, 128, 0))
             {
-                ForegroundColor = Colors.Red;
-                IsBold = true;
             }
         }
 
         [Export(typeof(EditorFormatDefinition))]
         [Order(Before = Priority.Default)]
-        [ClassificationType(ClassificationTypeNames = StackTrace)]
-        [Name(StackTrace)]
+        [ClassificationType(ClassificationTypeNames = OutputClassifierDefinitions.Error)]
+        [Name(OutputClassifierDefinitions.Error)]
         [UserVisible(true)]
-        internal sealed class OutputStackTraceFormat : ClassificationFormatDefinition
+        internal sealed class OutputErrorFormat : OutputColorerFormat
         {
-            public OutputStackTraceFormat()
+            public OutputErrorFormat() : base(Error, Colors.Red)
             {
-                ForegroundCustomizable = true;
-                ForegroundColor = Color.FromRgb(100, 0, 0);
             }
         }
 
         [Export(typeof(EditorFormatDefinition))]
         [Order(Before = Priority.Default)]
-        [ClassificationType(ClassificationTypeNames = Success)]
-        [Name(Success)]
+        [ClassificationType(ClassificationTypeNames = OutputClassifierDefinitions.StackTrace)]
+        [Name(OutputClassifierDefinitions.StackTrace)]
         [UserVisible(true)]
-        internal sealed class OutputSuccessFormat : ClassificationFormatDefinition
+        internal sealed class OutputStackTraceFormat : OutputColorerFormat
         {
-            public OutputSuccessFormat()
+            public OutputStackTraceFormat() : base(StackTrace, Color.FromRgb(100, 0, 0))
             {
-                ForegroundCustomizable = true;
-                ForegroundColor = Colors.Green;
-                IsBold = true;
             }
         }
 
         [Export(typeof(EditorFormatDefinition))]
         [Order(Before = Priority.Default)]
-        [ClassificationType(ClassificationTypeNames = Noise)]
-        [Name(Noise)]
-        [DisplayName(Noise)]
+        [ClassificationType(ClassificationTypeNames = OutputClassifierDefinitions.Success)]
+        [Name(OutputClassifierDefinitions.Success)]
         [UserVisible(true)]
-        internal sealed class OutputNoiseFormat : ClassificationFormatDefinition
+        internal sealed class OutputSuccessFormat : OutputColorerFormat
         {
-            public OutputNoiseFormat()
+            public OutputSuccessFormat() : base(Success, Colors.Green)
             {
-                ForegroundColor = Colors.Gray;
+            }
+        }
+
+        [Export(typeof(EditorFormatDefinition))]        
+        [ClassificationType(ClassificationTypeNames = OutputClassifierDefinitions.Noise)]
+        [Name(OutputClassifierDefinitions.Noise)]
+        [UserVisible(true)]
+        [Order(Before = Priority.Default)]
+        internal sealed class OutputNoiseFormat : OutputColorerFormat
+        {
+            public OutputNoiseFormat() : base(Noise, Colors.Gray)
+            {
             }
         } 
-    }
+    }    
 }

@@ -51,8 +51,8 @@ namespace OutputColorer
                     else if (Regex.IsMatch(text, @"^.+: error \w+:.+$"))
                         type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);                    
                     else if (Regex.IsMatch(text, @"^.+: warning \w+:.+$"))
-                        type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Warning);
-                
+                        type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Warning);                    
+
                     if (type != null)
                         spans.Add(new ClassificationSpan(line.Extent, type));
                 }

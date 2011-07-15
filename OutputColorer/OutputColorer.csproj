@@ -79,6 +79,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BuildOutputClassifier.cs" />
+    <Compile Include="FormatInfo.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="OutputClassifier.cs" />
     <Compile Include="OutputClassifierProvider.cs" />
