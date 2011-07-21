@@ -70,14 +70,20 @@ namespace OutputColorer
 
                 if (cii.bForegroundValid == 1)
                 {
-                    var color = ColorTranslator.FromWin32((int)cii.crForeground);
-                    result.ForegroundColor = Color.FromRgb(color.R, color.G, color.B);
+                    if (!IsAutomaticColor(storage, cii.crForeground))
+                    {
+                        var color = ColorTranslator.FromWin32((int)cii.crForeground);
+                        result.ForegroundColor = Color.FromRgb(color.R, color.G, color.B);
+                    }                    
                 }
             
                 if (cii.bBackgroundValid == 1)
                 {
-                    var color = ColorTranslator.FromWin32((int)cii.crBackground);
-                    result.BackGroundColor = Color.FromRgb(color.R, color.G, color.B);
+                    if (!IsAutomaticColor(storage, cii.crBackground))
+                    {
+                        var color = ColorTranslator.FromWin32((int)cii.crBackground);
+                        result.BackGroundColor = Color.FromRgb(color.R, color.G, color.B);
+                    }
                 }
             }
             catch (Exception ex)
@@ -86,6 +92,17 @@ namespace OutputColorer
             }
 
             return result;
+        }
+
+        private static bool IsAutomaticColor(IVsFontAndColorStorage storage, uint color)
+        {
+            var util = (IVsFontAndColorUtilities)storage;
+
+            var colorType = (int)__VSCOLORTYPE.CT_INVALID;
+            int hResult = util.GetColorType(color, out colorType);
+            ErrorHandler.ThrowOnFailure(hResult);
+
+            return (__VSCOLORTYPE)colorType == __VSCOLORTYPE.CT_AUTOMATIC;
         }
     }
 }

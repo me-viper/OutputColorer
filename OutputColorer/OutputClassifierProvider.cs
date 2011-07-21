@@ -53,9 +53,6 @@ namespace OutputColorer
         [Import]
         internal IClassificationTypeRegistryService ClassificationRegistry;
 
-        //[Import]
-        //internal IEditorFormatMapService FormatMapService;
-
         private static BuildOutputClassifier _buildOutputClassifier;
         private static OutputClassifier _debugOutputClassifier;
 
@@ -85,9 +82,6 @@ namespace OutputColorer
 
         public IClassifier GetClassifier(ITextBuffer buffer)
         {
-            if (_fontsAndColors == null)
-                _fontsAndColors = Utility.GetColorAndFontSettings();
-
             if (buffer.ContentType.IsOfType(BuildOutputContentType))
                 return _buildOutputClassifier ?? (_buildOutputClassifier = new BuildOutputClassifier(ClassificationRegistry));
                 //return new BuildOutputClassifier(ClassificationRegistry);
