@@ -13,36 +13,10 @@ using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.TextManager.Interop;
 using Microsoft.VisualStudio.Utilities;
 
+using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
+
 namespace OutputColorer
 {
-    public class TextManagerEvents : IVsTextManagerEvents
-    {
-        public void OnRegisterMarkerType(int iMarkerType)
-        {
-            
-        }
-
-        public void OnRegisterView(IVsTextView pView)
-        {
-            
-        }
-
-        public void OnUnregisterView(IVsTextView pView)
-        {
-            
-        }
-
-        public void OnUserPreferencesChanged(
-            VIEWPREFERENCES[] pViewPrefs, 
-            FRAMEPREFERENCES[] pFramePrefs, 
-            LANGPREFERENCES[] pLangPrefs, 
-            FONTCOLORPREFERENCES[] pColorPrefs)
-        {
-            
-            Debug.WriteLine("OnUserPreferencesChanged");
-        }
-    }
-    
     [Export(typeof(IClassifierProvider))]
     [ContentType("output")]
     public class OutputClassifierProvider : IClassifierProvider
@@ -57,26 +31,17 @@ namespace OutputColorer
         private static OutputClassifier _debugOutputClassifier;
 
         private static Dictionary<string, FormatInfo> _fontsAndColors;
-        
+
         public OutputClassifierProvider()
         {
-            _fontsAndColors = Utility.GetColorAndFontSettings();
-            //var textManager = ServiceProvider.GlobalProvider.GetService(typeof(SVsTextManager)) as IVsTextManager2;
-
-            //IConnectionPointContainer container = textManager as IConnectionPointContainer;
-            //IConnectionPoint textManagerEventsConnection = null;
-            //Guid eventGuid = typeof(IVsTextManagerEvents).GUID;
-            //container.FindConnectionPoint(ref eventGuid, out textManagerEventsConnection);
-            //var textManagerEvents = new TextManagerEvents();
-            //uint textManagerCookie;
-            //textManagerEventsConnection.Advise(textManagerEvents, out textManagerCookie);            
+            Debug.WriteLine("aa");
         }
 
         internal static FormatInfo GetFontAndColor(string classificationType)
         {
             if (_fontsAndColors == null || !_fontsAndColors.ContainsKey(classificationType))
                 return new FormatInfo();
-
+            
             return _fontsAndColors[classificationType];
         }
 

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutputColorer", "OutputColorer\OutputColorer.csproj", "{68A54644-CA68-4157-89D8-710412B769C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutputColorerInstaller", "OutputColorerInstaller\OutputColorerInstaller.csproj", "{5C2205D8-88D2-4514-8ACA-94ADD182FDF9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +13,6 @@ Global
 		{68A54644-CA68-4157-89D8-710412B769C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68A54644-CA68-4157-89D8-710412B769C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68A54644-CA68-4157-89D8-710412B769C0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C2205D8-88D2-4514-8ACA-94ADD182FDF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C2205D8-88D2-4514-8ACA-94ADD182FDF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C2205D8-88D2-4514-8ACA-94ADD182FDF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C2205D8-88D2-4514-8ACA-94ADD182FDF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,38 +3,49 @@ using System.Collections.Generic;
 using System.Drawing;
 
 using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
 using Color = System.Windows.Media.Color;
 
 namespace OutputColorer
 {
-    internal static class Utility
+    public interface IOutputColorerConfigurationService
     {
-        public static TService GetService<TService>() where TService : class
+        FormatInfo GetFontAndColor(string classificationType);
+    }
+
+    public sealed class OutputColorerConfigurationService : IOutputColorerConfigurationService
+    {
+        private IServiceProvider _serviceProvider;
+        private Dictionary<string, FormatInfo> _fontsAndColors;
+
+        public OutputColorerConfigurationService(IServiceProvider serviceProvider)
         {
-            return Package.GetGlobalService(typeof(TService)) as TService;
+            if (serviceProvider == null)
+                throw new ArgumentNullException("serviceProvider");
+
+            _serviceProvider = serviceProvider;
+            _fontsAndColors = GetColorAndFontSettings();
         }
 
-        public static TType GetService<TService, TType>() 
-            where TService : class 
-            where TType : class
+        public FormatInfo GetFontAndColor(string classificationType)
         {
-            var result = Package.GetGlobalService(typeof(TService)) as TType;
+            if (_fontsAndColors == null || !_fontsAndColors.ContainsKey(classificationType))
+                return new FormatInfo();
 
-            if (result == null)
-                throw new InvalidOperationException("Failed to get service.");
-
-            return result;
+            return _fontsAndColors[classificationType];
         }
 
-        public static Dictionary<string, FormatInfo> GetColorAndFontSettings()
+        private Dictionary<string, FormatInfo> GetColorAndFontSettings()
         {
             var formats = new Dictionary<string, FormatInfo>();
             int hResult = VSConstants.S_OK;
 
-            var cfStorage = GetService<SVsFontAndColorStorage, IVsFontAndColorStorage>();
+            var cfStorage = (IVsFontAndColorStorage)_serviceProvider.GetService(typeof(SVsFontAndColorStorage));
+
+            if (cfStorage == null)
+                throw new InvalidOperationException("Couldn't initialize SVsFontAndColorStorage service.");
+
             var editorCategory = new Guid("{A27B4E24-A735-4d1d-B8E7-9716E1E3D8E0}");
             hResult = cfStorage.OpenCategory(
                 ref editorCategory,
@@ -74,9 +85,9 @@ namespace OutputColorer
                     {
                         var color = ColorTranslator.FromWin32((int)cii.crForeground);
                         result.ForegroundColor = Color.FromRgb(color.R, color.G, color.B);
-                    }                    
+                    }
                 }
-            
+
                 if (cii.bBackgroundValid == 1)
                 {
                     if (!IsAutomaticColor(storage, cii.crBackground))
