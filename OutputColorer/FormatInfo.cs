@@ -3,7 +3,7 @@ using System.Windows.Media;
 
 namespace OutputColorer
 {
-    public sealed class FormatInfo
+    internal sealed class FormatInfo
     {
         public Color? ForegroundColor { get; set; }
         public Color? BackGroundColor { get; set; }

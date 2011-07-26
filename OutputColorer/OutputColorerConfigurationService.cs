@@ -14,16 +14,12 @@ namespace OutputColorer
 {
     [ComVisible(true)]
     [Guid("B066E361-98CD-4FEE-AAD2-1B01A330EFBC")]
-    public interface IOutputColorerConfigurationService
+    internal interface IOutputColorerConfigurationService
     {
         FormatInfo GetFontAndColor(string classificationType);
     }
-
-    [Guid("E919A3F1-15AB-4794-B72C-A0C4402CBCB4")]
-    public class SOutputColorerConfigurationService
-    {}
-
-    public sealed class OutputColorerConfigurationService : SOutputColorerConfigurationService, IOutputColorerConfigurationService
+    
+    internal sealed class OutputColorerConfigurationService : IOutputColorerConfigurationService
     {
         private Dictionary<string, FormatInfo> _fontsAndColors;
 

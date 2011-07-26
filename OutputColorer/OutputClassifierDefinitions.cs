@@ -19,23 +19,23 @@ namespace OutputColorer
 
         [Export]
         [Name(Warning)]
-        internal static ClassificationTypeDefinition WarningDefinition;
+        internal static ClassificationTypeDefinition WarningDefinition = null;
 
         [Export]
         [Name(Error)]
-        internal static ClassificationTypeDefinition ErrorDefinition;
+        internal static ClassificationTypeDefinition ErrorDefinition = null;
 
         [Export]
         [Name(Delimiter)]
-        internal static ClassificationTypeDefinition DelimiterDefinition;
+        internal static ClassificationTypeDefinition DelimiterDefinition = null;
 
         [Export]
         [Name(Success)]
-        internal static ClassificationTypeDefinition SuccessDefinition;
+        internal static ClassificationTypeDefinition SuccessDefinition = null;
 
         [Export]
         [Name(Noise)]
-        internal static ClassificationTypeDefinition NoiseDefinition;
+        internal static ClassificationTypeDefinition NoiseDefinition = null;
 
         internal class OutputColorerFormat : ClassificationFormatDefinition
         {

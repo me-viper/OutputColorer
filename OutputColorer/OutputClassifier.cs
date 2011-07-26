@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.Text.Classification;
 
 namespace OutputColorer
 {
-    public class OutputClassifier : IClassifier
+    internal sealed class OutputClassifier : IClassifier
     {
         private IClassificationTypeRegistryService _classificationTypeRegistry;
 
@@ -16,7 +16,15 @@ namespace OutputColorer
             _classificationTypeRegistry = registry;
         }
 
-        public event EventHandler<ClassificationChangedEventArgs> ClassificationChanged;
+        /// <summary>
+        /// Ocurs when the classification of a span of text has changed.
+        /// </summary>
+        /// <remarks>
+        /// This event does not need to be raised for newly-inserted text.
+        /// However, it should be raised if any text other than that which was actually inserted has been reclassified.
+        /// It should also be raised if the deletion of text causes the remaining
+        /// text to be reclassified.</remarks>
+        public event EventHandler<ClassificationChangedEventArgs> ClassificationChanged = delegate { };
 
         /// <summary>
         /// Classify debug output spans.

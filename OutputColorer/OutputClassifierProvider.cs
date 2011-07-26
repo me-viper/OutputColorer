@@ -7,6 +7,9 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace OutputColorer
 {
+    /// <summary>
+    /// Provides classifiers for Output window.
+    /// </summary>
     [Export(typeof(IClassifierProvider))]
     [ContentType("output")]
     public class OutputClassifierProvider : IClassifierProvider
@@ -15,11 +18,16 @@ namespace OutputColorer
         private const string BuildOutputContentType = "BuildOutput";        
 
         [Import]
-        internal IClassificationTypeRegistryService ClassificationRegistry;
+        internal IClassificationTypeRegistryService ClassificationRegistry = null;
       
         private static BuildOutputClassifier _buildOutputClassifier;
         private static OutputClassifier _debugOutputClassifier;
 
+        /// <summary>
+        /// Gets the classifier for specified text buffer.
+        /// </summary>
+        /// <param name="buffer">The buffer.</param>
+        /// <returns>Classifier for specified text buffer.</returns>
         public IClassifier GetClassifier(ITextBuffer buffer)
         {
             if (buffer.ContentType.IsOfType(BuildOutputContentType))
