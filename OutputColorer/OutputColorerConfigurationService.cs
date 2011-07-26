@@ -86,7 +86,8 @@ namespace OutputColorer
                 // We might fail here if item has default settings. However, that is not issue
                 // because empty FormatInfo will force classification definition for specified
                 // item to use default settings.
-                ErrorHandler.ThrowOnFailure(hResult);
+                if (ErrorHandler.Failed(hResult))
+                    return result;
 
                 var cii = colorableItemInfos[0];
 
@@ -110,7 +111,7 @@ namespace OutputColorer
             }
             catch (Exception ex)
             {
-                Logger.Instance.Trace(ex);
+                Logger.Instance.Write(ex);
             }
 
             return result;
