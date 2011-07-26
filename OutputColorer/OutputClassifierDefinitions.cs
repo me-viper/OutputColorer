@@ -47,18 +47,30 @@ namespace OutputColorer
                 Color? defaultForegroundColor) : this(displayName, defaultForegroundColor, Colors.White)
             {
             }
-            
+
             protected OutputColorerFormat(
                 string displayName,
                 Color? defaultForegroundColor,
-                Color? defaultBackgroundColor)
+                Color? defaultBackgroundColor) : this(
+                displayName,
+                defaultForegroundColor,
+                defaultBackgroundColor, 
+                false)
+            {
+            }
+
+            protected OutputColorerFormat(
+                string displayName,
+                Color? defaultForegroundColor,
+                Color? defaultBackgroundColor,
+                bool isBold)
             {
                 DisplayName = displayName;
 
                 var formatInfo = _colorerConfiguration.GetFontAndColor(displayName);
                 ForegroundColor = formatInfo.ForegroundColor ?? defaultForegroundColor;
                 BackgroundColor = formatInfo.BackGroundColor ?? defaultBackgroundColor;
-                IsBold = formatInfo.IsBold;
+                IsBold = formatInfo.IsBold ?? isBold;
             }
         }
 

@@ -59,7 +59,23 @@ namespace OutputColorer
                     else if (Regex.IsMatch(text, @"^.+: error \w+:.+$"))
                         type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);                    
                     else if (Regex.IsMatch(text, @"^.+: warning \w+:.+$"))
-                        type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Warning);                    
+                        type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Warning);
+                    else if (Regex.IsMatch(text, @"^={10}\sBuild:.*$"))
+                    {
+                        if (text.Contains(", 0 failed,"))
+                        {
+                            type = _classificationTypeRegistry.GetClassificationType(
+                                OutputClassifierDefinitions.Success
+                                );
+                        }
+                        else
+                        {
+                            type = _classificationTypeRegistry.GetClassificationType(
+                                OutputClassifierDefinitions.Error
+                                );
+                        }
+
+                    }
 
                     if (type != null)
                         spans.Add(new ClassificationSpan(line.Extent, type));

@@ -7,6 +7,6 @@ namespace OutputColorer
     {
         public Color? ForegroundColor { get; set; }
         public Color? BackGroundColor { get; set; }
-        public bool IsBold { get; set; }
+        public bool? IsBold { get; set; }
     }
 }

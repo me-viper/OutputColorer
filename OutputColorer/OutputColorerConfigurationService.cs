@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using Microsoft.VisualStudio.TextManager.Interop;
 
 using Color = System.Windows.Media.Color;
 
@@ -59,11 +60,11 @@ namespace OutputColorer
                 );
             ErrorHandler.ThrowOnFailure(hResult);
 
-            formats.Add(OutputClassifierDefinitions.Noise, GetColor(OutputClassifierDefinitions.Noise, cfStorage));
-            formats.Add(OutputClassifierDefinitions.Error, GetColor(OutputClassifierDefinitions.Error, cfStorage));
-            formats.Add(OutputClassifierDefinitions.Warning, GetColor(OutputClassifierDefinitions.Warning, cfStorage));
-            formats.Add(OutputClassifierDefinitions.Delimiter, GetColor(OutputClassifierDefinitions.Delimiter, cfStorage));
-            formats.Add(OutputClassifierDefinitions.Success, GetColor(OutputClassifierDefinitions.Success, cfStorage));
+            formats.Add(OutputClassifierDefinitions.Noise, GetFormatInfo(OutputClassifierDefinitions.Noise, cfStorage));
+            formats.Add(OutputClassifierDefinitions.Error, GetFormatInfo(OutputClassifierDefinitions.Error, cfStorage));
+            formats.Add(OutputClassifierDefinitions.Warning, GetFormatInfo(OutputClassifierDefinitions.Warning, cfStorage));
+            formats.Add(OutputClassifierDefinitions.Delimiter, GetFormatInfo(OutputClassifierDefinitions.Delimiter, cfStorage));
+            formats.Add(OutputClassifierDefinitions.Success, GetFormatInfo(OutputClassifierDefinitions.Success, cfStorage));
 
             hResult = cfStorage.CloseCategory();
             ErrorHandler.ThrowOnFailure(hResult);
@@ -71,7 +72,7 @@ namespace OutputColorer
             return formats;
         }
 
-        private static FormatInfo GetColor(string itemName, IVsFontAndColorStorage storage)
+        private static FormatInfo GetFormatInfo(string itemName, IVsFontAndColorStorage storage)
         {
             var result = new FormatInfo();
 
@@ -107,6 +108,13 @@ namespace OutputColorer
                         var color = ColorTranslator.FromWin32((int)cii.crBackground);
                         result.BackGroundColor = Color.FromRgb(color.R, color.G, color.B);
                     }
+                }
+
+                if (cii.bFontFlagsValid == 1)
+                {
+                    var fontFlags = (FONTFLAGS)cii.dwFontFlags;
+                    if (fontFlags.HasFlag(FONTFLAGS.FF_BOLD))
+                        result.IsBold = true;
                 }
             }
             catch (Exception ex)
