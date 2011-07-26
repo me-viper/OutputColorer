@@ -4,10 +4,10 @@ using System;
 
 namespace Talk2Bits.OutputColorerInstaller
 {
-    static class GuidList
+    internal static class GuidList
     {
-        public const string guidOutputColorerInstallerPkgString = "8ea955ed-fd1d-4b69-8afe-09d0eb2ac656";
-        public const string guidOutputColorerInstallerCmdSetString = "b744e2e5-7794-483a-aeee-7f92890452c2";
+        public const string guidOutputColorerInstallerPkgString = "0875BBE6-451F-48BE-8F8C-E9EA43609D1A";
+        public const string guidOutputColorerInstallerCmdSetString = "36DEADC2-538C-4DC0-A5C5-4CAC15DAE4D8";
 
         public static readonly Guid guidOutputColorerInstallerCmdSet = new Guid(guidOutputColorerInstallerCmdSetString);
     };

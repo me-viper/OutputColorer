@@ -44,7 +44,7 @@ namespace Talk2Bits.OutputColorerInstaller
         public OutputColorerInstallerPackage()
         {
             Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", this.ToString()));            
-        }        
+        }
 
         /////////////////////////////////////////////////////////////////////////////
         // Overriden Package Implementation
@@ -57,13 +57,8 @@ namespace Talk2Bits.OutputColorerInstaller
         protected override void Initialize()
         {
             Trace.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
-            base.Initialize();
-
-            IOutputColorerConfigurationService occs = new OutputColorerConfigurationService(this);
-
-            IServiceContainer serviceContainer = this;
-            serviceContainer.AddService(typeof(OutputColorerConfigurationService), occs);
-        }
+            base.Initialize();            
+        }        
         #endregion
 
     }

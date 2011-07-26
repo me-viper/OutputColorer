@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
-    <Identifier Id="8ea955ed-fd1d-4b69-8afe-09d0eb2ac656">
+    <Identifier Id="0875BBE6-451F-48BE-8F8C-E9EA43609D1A">
         <Name>Output Colorer</Name>
         <Author>Talk2Bits</Author>
         <Version>1.0</Version>
@@ -23,7 +23,7 @@
         </Reference>
     </References>
     <Content>
+        <MefComponent>|%CurrentProject%|</MefComponent>
         <VsPackage>|%CurrentProject%;PkgdefProjectOutputGroup|</VsPackage>
-        <MefComponent>|OutputColorer|</MefComponent>
     </Content>
 </Vsix>

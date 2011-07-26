@@ -1,12 +1,7 @@
 using System;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
-using System.Drawing;
 using System.Windows.Media;
 
-using Microsoft.Internal.VisualStudio.PlatformUI;
-using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
@@ -20,7 +15,7 @@ namespace OutputColorer
         internal const string Warning = "OutputColorer.Warning";
         internal const string Success = "OutputColorer.Success";
         internal const string Noise = "OutputColorer.Noise";
-        internal const string StackTrace = "OutputColorer.Delimiter";
+        internal const string Delimiter = "OutputColorer.Delimiter";
 
         [Export]
         [Name(Warning)]
@@ -31,8 +26,8 @@ namespace OutputColorer
         internal static ClassificationTypeDefinition ErrorDefinition;
 
         [Export]
-        [Name(StackTrace)]
-        internal static ClassificationTypeDefinition StackTraceDefinition;
+        [Name(Delimiter)]
+        internal static ClassificationTypeDefinition DelimiterDefinition;
 
         [Export]
         [Name(Success)]
@@ -44,20 +39,23 @@ namespace OutputColorer
 
         internal class OutputColorerFormat : ClassificationFormatDefinition
         {
+            private static IOutputColorerConfigurationService _colorerConfiguration =
+                new OutputColorerConfigurationService();
+
             protected OutputColorerFormat(
                 string displayName,
                 Color? defaultForegroundColor) : this(displayName, defaultForegroundColor, Colors.White)
             {
             }
-
+            
             protected OutputColorerFormat(
-                string displayName, 
+                string displayName,
                 Color? defaultForegroundColor,
                 Color? defaultBackgroundColor)
             {
-                DisplayName = displayName;
-                
-                var formatInfo = OutputClassifierProvider.GetFontAndColor(displayName);
+                DisplayName = displayName;                
+
+                var formatInfo = _colorerConfiguration.GetFontAndColor(displayName);
                 ForegroundColor = formatInfo.ForegroundColor ?? defaultForegroundColor;
                 BackgroundColor = formatInfo.BackGroundColor ?? defaultBackgroundColor;
                 IsBold = formatInfo.IsBold;
@@ -90,12 +88,12 @@ namespace OutputColorer
 
         [Export(typeof(EditorFormatDefinition))]
         [Order(Before = Priority.Default)]
-        [ClassificationType(ClassificationTypeNames = OutputClassifierDefinitions.StackTrace)]
-        [Name(OutputClassifierDefinitions.StackTrace)]
+        [ClassificationType(ClassificationTypeNames = OutputClassifierDefinitions.Delimiter)]
+        [Name(OutputClassifierDefinitions.Delimiter)]
         [UserVisible(true)]
         internal sealed class OutputStackTraceFormat : OutputColorerFormat
         {
-            public OutputStackTraceFormat() : base(StackTrace, Color.FromRgb(100, 0, 0))
+            public OutputStackTraceFormat() : base(Delimiter, Color.FromRgb(100, 0, 0))
             {
             }
         }

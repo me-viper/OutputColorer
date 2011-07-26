@@ -1,33 +1,37 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 using Microsoft.VisualStudio;
+using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
 using Color = System.Windows.Media.Color;
 
 namespace OutputColorer
 {
+    [ComVisible(true)]
+    [Guid("B066E361-98CD-4FEE-AAD2-1B01A330EFBC")]
     public interface IOutputColorerConfigurationService
     {
         FormatInfo GetFontAndColor(string classificationType);
     }
 
-    public sealed class OutputColorerConfigurationService : IOutputColorerConfigurationService
+    [Guid("E919A3F1-15AB-4794-B72C-A0C4402CBCB4")]
+    public class SOutputColorerConfigurationService
+    {}
+
+    public sealed class OutputColorerConfigurationService : SOutputColorerConfigurationService, IOutputColorerConfigurationService
     {
-        private IServiceProvider _serviceProvider;
         private Dictionary<string, FormatInfo> _fontsAndColors;
 
-        public OutputColorerConfigurationService(IServiceProvider serviceProvider)
+        public OutputColorerConfigurationService()
         {
-            if (serviceProvider == null)
-                throw new ArgumentNullException("serviceProvider");
-
-            _serviceProvider = serviceProvider;
             _fontsAndColors = GetColorAndFontSettings();
         }
-
+                
         public FormatInfo GetFontAndColor(string classificationType)
         {
             if (_fontsAndColors == null || !_fontsAndColors.ContainsKey(classificationType))
@@ -41,22 +45,22 @@ namespace OutputColorer
             var formats = new Dictionary<string, FormatInfo>();
             int hResult = VSConstants.S_OK;
 
-            var cfStorage = (IVsFontAndColorStorage)_serviceProvider.GetService(typeof(SVsFontAndColorStorage));
-
+            var cfStorage = Utility.GetService<SVsFontAndColorStorage, IVsFontAndColorStorage>();
+            
             if (cfStorage == null)
                 throw new InvalidOperationException("Couldn't initialize SVsFontAndColorStorage service.");
 
             var editorCategory = new Guid("{A27B4E24-A735-4d1d-B8E7-9716E1E3D8E0}");
             hResult = cfStorage.OpenCategory(
                 ref editorCategory,
-                (uint)(__FCSTORAGEFLAGS.FCSF_READONLY | __FCSTORAGEFLAGS.FCSF_LOADDEFAULTS)
+                (uint)(__FCSTORAGEFLAGS.FCSF_READONLY)
                 );
             ErrorHandler.ThrowOnFailure(hResult);
 
             formats.Add(OutputClassifierDefinitions.Noise, GetColor(OutputClassifierDefinitions.Noise, cfStorage));
             formats.Add(OutputClassifierDefinitions.Error, GetColor(OutputClassifierDefinitions.Error, cfStorage));
             formats.Add(OutputClassifierDefinitions.Warning, GetColor(OutputClassifierDefinitions.Warning, cfStorage));
-            formats.Add(OutputClassifierDefinitions.StackTrace, GetColor(OutputClassifierDefinitions.StackTrace, cfStorage));
+            formats.Add(OutputClassifierDefinitions.Delimiter, GetColor(OutputClassifierDefinitions.Delimiter, cfStorage));
             formats.Add(OutputClassifierDefinitions.Success, GetColor(OutputClassifierDefinitions.Success, cfStorage));
 
             hResult = cfStorage.CloseCategory();

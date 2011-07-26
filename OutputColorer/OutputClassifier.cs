@@ -39,7 +39,7 @@ namespace OutputColorer
 
                 if (text.Contains("--- End of inner exception stack trace ---"))
                 {
-                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.StackTrace);
+                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Delimiter);
                 }
                 else if (text.StartsWith("System.Windows.Data Error:"))
                 {
