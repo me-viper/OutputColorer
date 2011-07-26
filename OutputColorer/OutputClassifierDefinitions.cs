@@ -53,7 +53,7 @@ namespace OutputColorer
                 Color? defaultForegroundColor,
                 Color? defaultBackgroundColor)
             {
-                DisplayName = displayName;                
+                DisplayName = displayName;
 
                 var formatInfo = _colorerConfiguration.GetFontAndColor(displayName);
                 ForegroundColor = formatInfo.ForegroundColor ?? defaultForegroundColor;

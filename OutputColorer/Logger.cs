@@ -45,5 +45,11 @@ namespace OutputColorer
         {
             _loggerPane.OutputString(text + Environment.NewLine);
         }
+
+        [Conditional("DEBUG")]
+        public void Trace(Exception error)
+        {
+            _loggerPane.OutputString(error.ToString());
+        }
     }
 }

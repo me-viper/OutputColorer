@@ -36,7 +36,7 @@ namespace OutputColorer
             return _fontsAndColors[classificationType];
         }
 
-        private Dictionary<string, FormatInfo> GetColorAndFontSettings()
+        private static Dictionary<string, FormatInfo> GetColorAndFontSettings()
         {
             var formats = new Dictionary<string, FormatInfo>();
             int hResult = VSConstants.S_OK;
@@ -47,6 +47,12 @@ namespace OutputColorer
                 throw new InvalidOperationException("Couldn't initialize SVsFontAndColorStorage service.");
 
             var editorCategory = new Guid("{A27B4E24-A735-4d1d-B8E7-9716E1E3D8E0}");
+
+            // In general we should also pass __FCSTORAGEFLAGS.FCSF_LOADDEFAULTS flag here.
+            // Unfortunately this is not possible in out case, since it will trigger
+            // loading of our classification definitions, BUT this code is called form
+            // static constuctor of base class of our classification definitions. As
+            // result we'll get stack overflow.
             hResult = cfStorage.OpenCategory(
                 ref editorCategory,
                 (uint)(__FCSTORAGEFLAGS.FCSF_READONLY)
@@ -75,6 +81,11 @@ namespace OutputColorer
 
                 var colorableItemInfos = new ColorableItemInfo[1];
                 hResult = storage.GetItem(itemName, colorableItemInfos);
+                
+                // Since we do not load default font and color settings for specified item.
+                // We might fail here if item has default settings. However, that is not issue
+                // because empty FormatInfo will force classification definition for specified
+                // item to use default settings.
                 ErrorHandler.ThrowOnFailure(hResult);
 
                 var cii = colorableItemInfos[0];
@@ -99,7 +110,7 @@ namespace OutputColorer
             }
             catch (Exception ex)
             {
-                Logger.Instance.Write(ex);
+                Logger.Instance.Trace(ex);
             }
 
             return result;
