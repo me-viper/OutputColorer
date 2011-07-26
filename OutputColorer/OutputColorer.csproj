@@ -150,6 +150,7 @@
   <ItemGroup>
     <Content Include="License.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="Resources\Package.ico" />
     <None Include="source.extension.vsixmanifest">
