@@ -93,7 +93,7 @@ namespace OutputColorer
         [UserVisible(true)]
         internal sealed class OutputErrorFormat : OutputColorerFormat
         {
-            public OutputErrorFormat() : base(Error, Colors.Red, Colors.White, true)
+            public OutputErrorFormat() : base(Error, Colors.Red)
             {
             }
         }
@@ -117,7 +117,7 @@ namespace OutputColorer
         [UserVisible(true)]
         internal sealed class OutputSuccessFormat : OutputColorerFormat
         {
-            public OutputSuccessFormat() : base(Success, Colors.Green, Colors.White, true)
+            public OutputSuccessFormat() : base(Success, Colors.Green)
             {
             }
         }
