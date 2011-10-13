@@ -1,8 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Text.Classification;
 
 using Talk2Bits.OutputColorer.Controls;
@@ -25,8 +27,8 @@ namespace Talk2Bits.OutputColorer
     // This attribute is used to register the informations needed to show the this package
     // in the Help/About dialog of Visual Studio.
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
-    [ProvideOptionPageAttribute(typeof(OutputColorerOptionsPage), "Output Colorer Options", "General", 113, 114, true)]
-    [ProvideProfileAttribute(typeof(OutputColorerOptionsPage), "Output Colorer Options", "Color settings", 113, 115, true, DescriptionResourceID = 101)]    
+    [ProvideOptionPageAttribute(typeof(OutputColorerOptionsPage), "Output Colorer", "General", 113, 114, true)]
+    [ProvideProfileAttribute(typeof(OutputColorerOptionsPage), "Output Colorer", "Color settings", 113, 115, true, DescriptionResourceID = 101)]    
     [Guid(GuidList.GuidOutputColorerInstallerPkgString)]
     [ProvideBindingPath]
     public sealed class OutputColorerInstallerPackage : Package

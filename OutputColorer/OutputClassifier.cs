@@ -45,28 +45,28 @@ namespace Talk2Bits.OutputColorer
                 IClassificationType type = null;
                 string text = span.GetText().TrimStart();
 
-                if (text.Contains("--- End of inner exception stack trace ---"))
-                {
-                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Delimiter);
-                }
-                else if (text.StartsWith("System.Windows.Data Error:"))
-                {
-                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
-                }
-                else if (text.StartsWith("at") || 
-                            text.StartsWith("A first chance exception of type") || 
-                                text.Contains("Exception:"))
-                {
-                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
-                }
-                else if (Regex.IsMatch(text, "^The (?:thread|program) .+ has exited with code .+$"))
-                {
-                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Noise);
-                }
-                else if (Regex.IsMatch(text, @"^\'.+\'\s+.+: (?:Loaded|Cannot find or open the PDB file).*$"))
-                {
-                    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Noise);
-                }                
+                //if (text.Contains("--- End of inner exception stack trace ---"))
+                //{
+                //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Delimiter);
+                //}
+                //else if (text.StartsWith("System.Windows.Data Error:"))
+                //{
+                //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
+                //}
+                //else if (text.StartsWith("at") || 
+                //            text.StartsWith("A first chance exception of type") || 
+                //                text.Contains("Exception:"))
+                //{
+                //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
+                //}
+                //else if (Regex.IsMatch(text, "^The (?:thread|program) .+ has exited with code .+$"))
+                //{
+                //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Noise);
+                //}
+                //else if (Regex.IsMatch(text, @"^\'.+\'\s+.+: (?:Loaded|Cannot find or open the PDB file).*$"))
+                //{
+                //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Noise);
+                //}                
 
                 if (type != null)
                     spans.Add(new ClassificationSpan(span, type));

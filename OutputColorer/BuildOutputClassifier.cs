@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Windows.Media;
 
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
@@ -9,11 +10,13 @@ namespace Talk2Bits.OutputColorer
 {
     internal sealed class BuildOutputClassifier : IClassifier
     {
+        private IEnumerable<ColorerFormatSetting> _settings;
         private IClassificationTypeRegistryService _classificationTypeRegistry;
 
-        internal BuildOutputClassifier(IClassificationTypeRegistryService registry)
+        internal BuildOutputClassifier(IClassificationTypeRegistryService registry, IEnumerable<ColorerFormatSetting> settings)
         {
             _classificationTypeRegistry = registry;
+            _settings = settings;
         }
 
         /// <summary>
@@ -52,33 +55,44 @@ namespace Talk2Bits.OutputColorer
                     IClassificationType type = null;
                     string text = line.GetText();
 
-                    if (text.Contains("- Failed  -"))
-                        type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
-                    else if (text.Contains("- Success -"))
-                        type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Success);
-                    else if (Regex.IsMatch(text, @"^.+: error \w+:.+$"))
-                        type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);                    
-                    else if (Regex.IsMatch(text, @"^.+: warning \w+:.+$"))
-                        type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Warning);
-                    else if (Regex.IsMatch(text, @"^={10}\sBuild:.*$"))
+                    foreach (var setting in _settings)
                     {
-                        if (text.Contains(", 0 failed,"))
+                        if (Regex.IsMatch(text, setting.Regex))
                         {
-                            type = _classificationTypeRegistry.GetClassificationType(
-                                OutputClassifierDefinitions.Success
-                                );
-                        }
-                        else
-                        {
-                            type = _classificationTypeRegistry.GetClassificationType(
-                                OutputClassifierDefinitions.Error
-                                );
-                        }
+                            type = _classificationTypeRegistry.GetClassificationType(setting.ClassificationType);
 
+                            if (type != null)
+                                spans.Add(new ClassificationSpan(line.Extent, type));
+                        }
                     }
 
-                    if (type != null)
-                        spans.Add(new ClassificationSpan(line.Extent, type));
+                    //if (text.Contains("- Failed  -"))
+                    //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
+                    //else if (text.Contains("- Success -"))
+                    //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Success);
+                    //else if (Regex.IsMatch(text, @"^.+: error \w+:.+$"))
+                    //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);                    
+                    //else if (Regex.IsMatch(text, @"^.+: warning \w+:.+$"))
+                    //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Warning);
+                    //else if (Regex.IsMatch(text, @"^={10}\sBuild:.*$"))
+                    //{
+                    //    if (text.Contains(", 0 failed,"))
+                    //    {
+                    //        type = _classificationTypeRegistry.GetClassificationType(
+                    //            OutputClassifierDefinitions.Success
+                    //            );
+                    //    }
+                    //    else
+                    //    {
+                    //        type = _classificationTypeRegistry.GetClassificationType(
+                    //            OutputClassifierDefinitions.Error
+                    //            );
+                    //    }
+
+                    //}
+
+                    //if (type != null)
+                    //    spans.Add(new ClassificationSpan(line.Extent, type));
                 }
             }
             catch (Exception ex)
