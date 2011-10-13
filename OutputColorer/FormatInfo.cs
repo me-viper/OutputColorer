@@ -1,7 +1,6 @@
-using System;
 using System.Windows.Media;
 
-namespace OutputColorer
+namespace Talk2Bits.OutputColorer
 {
     internal sealed class FormatInfo
     {

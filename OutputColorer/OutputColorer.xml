@@ -1,33 +1,69 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>OutputColorer</name>
+        <name>Talk2Bits.OutputColorer</name>
     </assembly>
     <members>
-        <member name="T:OutputColorer.Resources">
+        <member name="T:Microsoft.VisualStudio.Shell.ProvideBindingPathAttribute">
+            <summary>
+            This attribute registers a path that should be probed for candidate assemblies at assembly load time.
+            
+            For example:
+              [...\VisualStudio\10.0\BindingPaths\{5C48C732-5C7F-40f0-87A7-05C4F15BC8C3}]
+                "$PackageFolder$"=""
+                
+            This would register the "PackageFolder" (i.e. the location of the pkgdef file) as a directory to be probed
+            for assemblies to load.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Shell.ProvideBindingPathAttribute.SubPath">
+            <summary>
+            An optional SubPath to set after $PackageFolder$. This should be used
+            if the assemblies to be probed reside in a different directory than
+            the pkgdef file.
+            </summary>
+        </member>
+        <member name="F:Talk2Bits.OutputColorer.Controls.OutputColorerOptions.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Talk2Bits.OutputColorer.Controls.OutputColorerOptions.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Talk2Bits.OutputColorer.Controls.OutputColorerOptions.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Talk2Bits.OutputColorer.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
             </summary>
         </member>
-        <member name="P:OutputColorer.Resources.ResourceManager">
+        <member name="P:Talk2Bits.OutputColorer.Resources.ResourceManager">
             <summary>
               Returns the cached ResourceManager instance used by this class.
             </summary>
         </member>
-        <member name="P:OutputColorer.Resources.Culture">
+        <member name="P:Talk2Bits.OutputColorer.Resources.Culture">
             <summary>
               Overrides the current thread's CurrentUICulture property for all
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
-        <member name="M:OutputColorer.OutputClassifier.GetClassificationSpans(Microsoft.VisualStudio.Text.SnapshotSpan)">
+        <member name="M:Talk2Bits.OutputColorer.OutputClassifier.GetClassificationSpans(Microsoft.VisualStudio.Text.SnapshotSpan)">
             <summary>
             Classify debug output spans.
             </summary>
             <param name="span">The span of interest in this projection buffer.</param>
             <returns>The list of <see cref="T:Microsoft.VisualStudio.Text.Classification.ClassificationSpan"/> as contributed by the source buffers.</returns>
         </member>
-        <member name="E:OutputColorer.OutputClassifier.ClassificationChanged">
+        <member name="E:Talk2Bits.OutputColorer.OutputClassifier.ClassificationChanged">
             <summary>
             Ocurs when the classification of a span of text has changed.
             </summary>
@@ -37,19 +73,19 @@
             It should also be raised if the deletion of text causes the remaining
             text to be reclassified.</remarks>
         </member>
-        <member name="T:OutputColorer.OutputClassifierProvider">
+        <member name="T:Talk2Bits.OutputColorer.OutputClassifierProvider">
             <summary>
             Provides classifiers for Output window.
             </summary>
         </member>
-        <member name="M:OutputColorer.OutputClassifierProvider.GetClassifier(Microsoft.VisualStudio.Text.ITextBuffer)">
+        <member name="M:Talk2Bits.OutputColorer.OutputClassifierProvider.GetClassifier(Microsoft.VisualStudio.Text.ITextBuffer)">
             <summary>
             Gets the classifier for specified text buffer.
             </summary>
             <param name="buffer">The buffer.</param>
             <returns>Classifier for specified text buffer.</returns>
         </member>
-        <member name="M:OutputColorer.BuildOutputClassifier.GetClassificationSpans(Microsoft.VisualStudio.Text.SnapshotSpan)">
+        <member name="M:Talk2Bits.OutputColorer.BuildOutputClassifier.GetClassificationSpans(Microsoft.VisualStudio.Text.SnapshotSpan)">
             <summary>
             Classify the given spans, which, for diff files, classifies
             a line at a time.
@@ -57,7 +93,7 @@
             <param name="span">The span of interest in this projection buffer.</param>
             <returns>The list of <see cref="T:Microsoft.VisualStudio.Text.Classification.ClassificationSpan"/> as contributed by the source buffers.</returns>
         </member>
-        <member name="E:OutputColorer.BuildOutputClassifier.ClassificationChanged">
+        <member name="E:Talk2Bits.OutputColorer.BuildOutputClassifier.ClassificationChanged">
             <summary>
             Ocurs when the classification of a span of text has changed.
             </summary>
@@ -67,7 +103,7 @@
             It should also be raised if the deletion of text causes the remaining
             text to be reclassified.</remarks>
         </member>
-        <member name="T:Talk2Bits.OutputColorerInstaller.OutputColorerInstallerPackage">
+        <member name="T:Talk2Bits.OutputColorer.OutputColorerInstallerPackage">
              <summary>
              This is the class that implements the package exposed by this assembly.
             
@@ -79,7 +115,7 @@
              register itself and its components with the shell.
              </summary>
         </member>
-        <member name="M:Talk2Bits.OutputColorerInstaller.OutputColorerInstallerPackage.#ctor">
+        <member name="M:Talk2Bits.OutputColorer.OutputColorerInstallerPackage.#ctor">
             <summary>
             Default constructor of the package.
             Inside this method you can place any initialization code that does not require 
@@ -88,7 +124,7 @@
             initialization is the Initialize method.
             </summary>
         </member>
-        <member name="M:Talk2Bits.OutputColorerInstaller.OutputColorerInstallerPackage.Initialize">
+        <member name="M:Talk2Bits.OutputColorer.OutputColorerInstallerPackage.Initialize">
             <summary>
             Initialization of the package; this method is called right after the package is sited, so this is the place
             where you can put all the initilaization code that rely on services provided by VisualStudio.

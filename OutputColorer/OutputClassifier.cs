@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace OutputColorer
+namespace Talk2Bits.OutputColorer
 {
     internal sealed class OutputClassifier : IClassifier
     {
@@ -36,7 +36,7 @@ namespace OutputColorer
             ITextSnapshot snapshot = span.Snapshot;
 
             var spans = new List<ClassificationSpan>();
-
+            
             try
             {
                 if (snapshot.Length == 0)

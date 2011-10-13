@@ -2,7 +2,7 @@ using System;
 
 using Microsoft.VisualStudio.Shell;
 
-namespace OutputColorer
+namespace Talk2Bits.OutputColorer
 {
     internal static class Utility
     {

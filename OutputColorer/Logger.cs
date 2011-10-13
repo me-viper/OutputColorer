@@ -7,9 +7,7 @@ using EnvDTE;
 
 using EnvDTE80;
 
-using Microsoft.VisualStudio.Shell;
-
-namespace OutputColorer
+namespace Talk2Bits.OutputColorer
 {
     internal sealed class Logger
     {

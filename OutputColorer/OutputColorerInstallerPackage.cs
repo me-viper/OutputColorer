@@ -1,19 +1,13 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using System.ComponentModel.Design;
 
-using Microsoft.VisualStudio.TextManager.Interop;
-using Microsoft.Win32;
-using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Text.Classification;
 
-using OutputColorer;
+using Talk2Bits.OutputColorer.Controls;
 
-namespace Talk2Bits.OutputColorerInstaller
+namespace Talk2Bits.OutputColorer
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -31,7 +25,10 @@ namespace Talk2Bits.OutputColorerInstaller
     // This attribute is used to register the informations needed to show the this package
     // in the Help/About dialog of Visual Studio.
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
-    [Guid(GuidList.guidOutputColorerInstallerPkgString)]
+    [ProvideOptionPageAttribute(typeof(OutputColorerOptionsPage), "Output Colorer Options", "General", 113, 114, true)]
+    [ProvideProfileAttribute(typeof(OutputColorerOptionsPage), "Output Colorer Options", "Color settings", 113, 115, true, DescriptionResourceID = 101)]    
+    [Guid(GuidList.GuidOutputColorerInstallerPkgString)]
+    [ProvideBindingPath]
     public sealed class OutputColorerInstallerPackage : Package
     {
         /// <summary>
@@ -57,7 +54,7 @@ namespace Talk2Bits.OutputColorerInstaller
         protected override void Initialize()
         {
             Trace.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
-            base.Initialize();            
+            base.Initialize();
         }        
         #endregion
 

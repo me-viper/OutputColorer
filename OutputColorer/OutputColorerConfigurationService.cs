@@ -1,17 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
 using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TextManager.Interop;
 
 using Color = System.Windows.Media.Color;
 
-namespace OutputColorer
+namespace Talk2Bits.OutputColorer
 {
     [ComVisible(true)]
     [Guid("B066E361-98CD-4FEE-AAD2-1B01A330EFBC")]

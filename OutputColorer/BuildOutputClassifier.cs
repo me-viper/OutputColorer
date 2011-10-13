@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace OutputColorer
+namespace Talk2Bits.OutputColorer
 {
     internal sealed class BuildOutputClassifier : IClassifier
     {

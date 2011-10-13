@@ -1,13 +1,10 @@
-using System;
 using System.ComponentModel.Composition;
 using System.Windows.Media;
 
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
-using Color = System.Windows.Media.Color;
-
-namespace OutputColorer
+namespace Talk2Bits.OutputColorer
 {
     internal class OutputClassifierDefinitions
     {
@@ -39,8 +36,8 @@ namespace OutputColorer
 
         internal class OutputColorerFormat : ClassificationFormatDefinition
         {
-            private static IOutputColorerConfigurationService _colorerConfiguration =
-                new OutputColorerConfigurationService();
+            //private static IOutputColorerConfigurationService _colorerConfiguration =
+            //    new OutputColorerConfigurationService();
 
             protected OutputColorerFormat(
                 string displayName,
@@ -67,10 +64,10 @@ namespace OutputColorer
             {
                 DisplayName = displayName;
 
-                var formatInfo = _colorerConfiguration.GetFontAndColor(displayName);
-                ForegroundColor = formatInfo.ForegroundColor ?? defaultForegroundColor;
-                BackgroundColor = formatInfo.BackGroundColor ?? defaultBackgroundColor;
-                IsBold = formatInfo.IsBold ?? isBold;
+                //var formatInfo = _colorerConfiguration.GetFontAndColor(displayName);
+                ForegroundColor = /*formatInfo.ForegroundColor ??*/ defaultForegroundColor;
+                BackgroundColor = /*formatInfo.BackGroundColor ??*/ defaultBackgroundColor;
+                IsBold = /*formatInfo.IsBold ??*/ isBold;
             }
         }
 
