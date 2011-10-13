@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Design.Serialization;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -45,17 +42,19 @@ namespace Talk2Bits.OutputColorer.Controls
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [TypeConverter(typeof(ColorerFormatSettingsCollectionConverter))]
         public Collection<ColorerFormatSetting> BuildOutputSettings
         {
-            get { return new Collection<ColorerFormatSetting>(_colorerOptions.Settings.ToList()); }
-            set { _colorerOptions.Settings = value; }
+            get { return new Collection<ColorerFormatSetting>(_colorerOptions.BuildOuptutSetting.ToList()); }
+            set { _colorerOptions.BuildOuptutSetting = value; }
         }
 
-        //[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        //public Collection<ColorerFormatSetting> DebugOutputSettings
-        //{
-        //    get { return _debugOutputSettings; }
-        //    set { _debugOutputSettings = value; }
-        //}
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [TypeConverter(typeof(ColorerFormatSettingsCollectionConverter))]
+        public Collection<ColorerFormatSetting> DebugOutputSettings
+        {
+            get { return new Collection<ColorerFormatSetting>(_colorerOptions.DebugOuptutSetting.ToList()); }
+            set { _colorerOptions.DebugOuptutSetting = value; }
+        }
     }
 }

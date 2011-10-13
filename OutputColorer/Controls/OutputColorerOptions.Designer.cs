@@ -29,148 +29,72 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this._colorerSettingsTabs = new System.Windows.Forms.TabControl();
             this._tabPageBuild = new System.Windows.Forms.TabPage();
-            this._tabPageOutput = new System.Windows.Forms.TabPage();
-            this._colorerFormatSettingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this._dataGridView = new System.Windows.Forms.DataGridView();
-            this._columnSettingId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._columnRegex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isBoldDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.foreColorDataGridViewTextBoxColumn = new Talk2Bits.OutputColorer.Controls.ColorPickerColumn();
-            this.backColorDataGridViewTextBoxColumn = new Talk2Bits.OutputColorer.Controls.ColorPickerColumn();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this._buildGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colorPickerColumn1 = new Talk2Bits.OutputColorer.Controls.ColorPickerColumn();
             this.colorPickerColumn2 = new Talk2Bits.OutputColorer.Controls.ColorPickerColumn();
-            this.tabControl1.SuspendLayout();
+            this._buildSettingsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this._tabPageOutput = new System.Windows.Forms.TabPage();
+            this._debugGridView = new System.Windows.Forms.DataGridView();
+            this._columnSettingId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._columnRegex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isBoldDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.foreColorDataGridViewTextBoxColumn = new Talk2Bits.OutputColorer.Controls.ColorPickerColumn();
+            this.backColorDataGridViewTextBoxColumn = new Talk2Bits.OutputColorer.Controls.ColorPickerColumn();
+            this._debugSettingsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this._colorerSettingsTabs.SuspendLayout();
             this._tabPageBuild.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._buildGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._buildSettingsBindingSource)).BeginInit();
             this._tabPageOutput.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._colorerFormatSettingBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._debugGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._debugSettingsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // _colorerSettingsTabs
             // 
-            this.tabControl1.Controls.Add(this._tabPageBuild);
-            this.tabControl1.Controls.Add(this._tabPageOutput);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(750, 377);
-            this.tabControl1.TabIndex = 0;
+            this._colorerSettingsTabs.Controls.Add(this._tabPageBuild);
+            this._colorerSettingsTabs.Controls.Add(this._tabPageOutput);
+            this._colorerSettingsTabs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._colorerSettingsTabs.Location = new System.Drawing.Point(0, 0);
+            this._colorerSettingsTabs.Name = "_colorerSettingsTabs";
+            this._colorerSettingsTabs.SelectedIndex = 0;
+            this._colorerSettingsTabs.Size = new System.Drawing.Size(750, 377);
+            this._colorerSettingsTabs.TabIndex = 0;
             // 
             // _tabPageBuild
             // 
-            this._tabPageBuild.Controls.Add(this.dataGridView1);
+            this._tabPageBuild.Controls.Add(this._buildGridView);
             this._tabPageBuild.Location = new System.Drawing.Point(4, 22);
             this._tabPageBuild.Name = "_tabPageBuild";
             this._tabPageBuild.Padding = new System.Windows.Forms.Padding(3);
             this._tabPageBuild.Size = new System.Drawing.Size(742, 351);
             this._tabPageBuild.TabIndex = 0;
-            this._tabPageBuild.Text = "tabPageBuild";
+            this._tabPageBuild.Text = "Build Output";
             this._tabPageBuild.UseVisualStyleBackColor = true;
             // 
-            // _tabPageOutput
+            // _buildGridView
             // 
-            this._tabPageOutput.Controls.Add(this._dataGridView);
-            this._tabPageOutput.Location = new System.Drawing.Point(4, 22);
-            this._tabPageOutput.Name = "_tabPageOutput";
-            this._tabPageOutput.Padding = new System.Windows.Forms.Padding(3);
-            this._tabPageOutput.Size = new System.Drawing.Size(742, 351);
-            this._tabPageOutput.TabIndex = 1;
-            this._tabPageOutput.Text = "tabPageOutput";
-            this._tabPageOutput.UseVisualStyleBackColor = true;
-            // 
-            // _colorerFormatSettingBindingSource
-            // 
-            this._colorerFormatSettingBindingSource.DataSource = typeof(Talk2Bits.OutputColorer.ColorerFormatSetting);
-            // 
-            // _dataGridView
-            // 
-            this._dataGridView.AutoGenerateColumns = false;
-            this._dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this._columnSettingId,
-            this._columnRegex,
-            this.isBoldDataGridViewCheckBoxColumn,
-            this.foreColorDataGridViewTextBoxColumn,
-            this.backColorDataGridViewTextBoxColumn});
-            this._dataGridView.DataSource = this._colorerFormatSettingBindingSource;
-            this._dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._dataGridView.Location = new System.Drawing.Point(3, 3);
-            this._dataGridView.MultiSelect = false;
-            this._dataGridView.Name = "_dataGridView";
-            this._dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this._dataGridView.Size = new System.Drawing.Size(736, 345);
-            this._dataGridView.TabIndex = 1;
-            // 
-            // _columnSettingId
-            // 
-            this._columnSettingId.DataPropertyName = "Id";
-            this._columnSettingId.HeaderText = "Id";
-            this._columnSettingId.Name = "_columnSettingId";
-            this._columnSettingId.Visible = false;
-            // 
-            // _columnRegex
-            // 
-            this._columnRegex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this._columnRegex.DataPropertyName = "Regex";
-            this._columnRegex.HeaderText = "Regex";
-            this._columnRegex.Name = "_columnRegex";
-            // 
-            // isBoldDataGridViewCheckBoxColumn
-            // 
-            this.isBoldDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.isBoldDataGridViewCheckBoxColumn.DataPropertyName = "IsBold";
-            this.isBoldDataGridViewCheckBoxColumn.HeaderText = "Is Bold";
-            this.isBoldDataGridViewCheckBoxColumn.Name = "isBoldDataGridViewCheckBoxColumn";
-            this.isBoldDataGridViewCheckBoxColumn.Width = 45;
-            // 
-            // foreColorDataGridViewTextBoxColumn
-            // 
-            this.foreColorDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.foreColorDataGridViewTextBoxColumn.DataPropertyName = "ForeColor";
-            this.foreColorDataGridViewTextBoxColumn.HeaderText = "Fore Color";
-            this.foreColorDataGridViewTextBoxColumn.MinimumWidth = 100;
-            this.foreColorDataGridViewTextBoxColumn.Name = "foreColorDataGridViewTextBoxColumn";
-            this.foreColorDataGridViewTextBoxColumn.ReadOnly = true;
-            this.foreColorDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.foreColorDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // backColorDataGridViewTextBoxColumn
-            // 
-            this.backColorDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.backColorDataGridViewTextBoxColumn.DataPropertyName = "BackColor";
-            this.backColorDataGridViewTextBoxColumn.HeaderText = "Back Color";
-            this.backColorDataGridViewTextBoxColumn.MinimumWidth = 100;
-            this.backColorDataGridViewTextBoxColumn.Name = "backColorDataGridViewTextBoxColumn";
-            this.backColorDataGridViewTextBoxColumn.ReadOnly = true;
-            this.backColorDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.backColorDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this._buildGridView.AutoGenerateColumns = false;
+            this._buildGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this._buildGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewCheckBoxColumn1,
             this.colorPickerColumn1,
             this.colorPickerColumn2});
-            this.dataGridView1.DataSource = this._colorerFormatSettingBindingSource;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(736, 345);
-            this.dataGridView1.TabIndex = 1;
+            this._buildGridView.DataSource = this._buildSettingsBindingSource;
+            this._buildGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._buildGridView.Location = new System.Drawing.Point(3, 3);
+            this._buildGridView.MultiSelect = false;
+            this._buildGridView.Name = "_buildGridView";
+            this._buildGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this._buildGridView.Size = new System.Drawing.Size(736, 345);
+            this._buildGridView.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -216,41 +140,125 @@
             this.colorPickerColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colorPickerColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // _buildSettingsBindingSource
+            // 
+            this._buildSettingsBindingSource.DataSource = typeof(Talk2Bits.OutputColorer.ColorerFormatSetting);
+            // 
+            // _tabPageOutput
+            // 
+            this._tabPageOutput.Controls.Add(this._debugGridView);
+            this._tabPageOutput.Location = new System.Drawing.Point(4, 22);
+            this._tabPageOutput.Name = "_tabPageOutput";
+            this._tabPageOutput.Padding = new System.Windows.Forms.Padding(3);
+            this._tabPageOutput.Size = new System.Drawing.Size(742, 351);
+            this._tabPageOutput.TabIndex = 1;
+            this._tabPageOutput.Text = "Debug Output";
+            this._tabPageOutput.UseVisualStyleBackColor = true;
+            // 
+            // _debugGridView
+            // 
+            this._debugGridView.AutoGenerateColumns = false;
+            this._debugGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this._debugGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this._columnSettingId,
+            this._columnRegex,
+            this.isBoldDataGridViewCheckBoxColumn,
+            this.foreColorDataGridViewTextBoxColumn,
+            this.backColorDataGridViewTextBoxColumn});
+            this._debugGridView.DataSource = this._debugSettingsBindingSource;
+            this._debugGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._debugGridView.Location = new System.Drawing.Point(3, 3);
+            this._debugGridView.MultiSelect = false;
+            this._debugGridView.Name = "_debugGridView";
+            this._debugGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this._debugGridView.Size = new System.Drawing.Size(736, 345);
+            this._debugGridView.TabIndex = 1;
+            // 
+            // _columnSettingId
+            // 
+            this._columnSettingId.DataPropertyName = "Id";
+            this._columnSettingId.HeaderText = "Id";
+            this._columnSettingId.Name = "_columnSettingId";
+            this._columnSettingId.Visible = false;
+            // 
+            // _columnRegex
+            // 
+            this._columnRegex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this._columnRegex.DataPropertyName = "Regex";
+            this._columnRegex.HeaderText = "Regex";
+            this._columnRegex.Name = "_columnRegex";
+            // 
+            // isBoldDataGridViewCheckBoxColumn
+            // 
+            this.isBoldDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.isBoldDataGridViewCheckBoxColumn.DataPropertyName = "IsBold";
+            this.isBoldDataGridViewCheckBoxColumn.HeaderText = "Is Bold";
+            this.isBoldDataGridViewCheckBoxColumn.Name = "isBoldDataGridViewCheckBoxColumn";
+            this.isBoldDataGridViewCheckBoxColumn.Width = 45;
+            // 
+            // foreColorDataGridViewTextBoxColumn
+            // 
+            this.foreColorDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.foreColorDataGridViewTextBoxColumn.DataPropertyName = "ForeColor";
+            this.foreColorDataGridViewTextBoxColumn.HeaderText = "Fore Color";
+            this.foreColorDataGridViewTextBoxColumn.MinimumWidth = 100;
+            this.foreColorDataGridViewTextBoxColumn.Name = "foreColorDataGridViewTextBoxColumn";
+            this.foreColorDataGridViewTextBoxColumn.ReadOnly = true;
+            this.foreColorDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.foreColorDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // backColorDataGridViewTextBoxColumn
+            // 
+            this.backColorDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.backColorDataGridViewTextBoxColumn.DataPropertyName = "BackColor";
+            this.backColorDataGridViewTextBoxColumn.HeaderText = "Back Color";
+            this.backColorDataGridViewTextBoxColumn.MinimumWidth = 100;
+            this.backColorDataGridViewTextBoxColumn.Name = "backColorDataGridViewTextBoxColumn";
+            this.backColorDataGridViewTextBoxColumn.ReadOnly = true;
+            this.backColorDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.backColorDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // _debugSettingsBindingSource
+            // 
+            this._debugSettingsBindingSource.DataSource = typeof(Talk2Bits.OutputColorer.ColorerFormatSetting);
+            // 
             // OutputColorerOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this._colorerSettingsTabs);
             this.Name = "OutputColorerOptions";
             this.Size = new System.Drawing.Size(750, 377);
-            this.tabControl1.ResumeLayout(false);
+            this._colorerSettingsTabs.ResumeLayout(false);
             this._tabPageBuild.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._buildGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._buildSettingsBindingSource)).EndInit();
             this._tabPageOutput.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this._colorerFormatSettingBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._debugGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._debugSettingsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl _colorerSettingsTabs;
         private System.Windows.Forms.TabPage _tabPageBuild;
         private System.Windows.Forms.TabPage _tabPageOutput;
-        private System.Windows.Forms.BindingSource _colorerFormatSettingBindingSource;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.BindingSource _buildSettingsBindingSource;
+        private System.Windows.Forms.DataGridView _buildGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
         private ColorPickerColumn colorPickerColumn1;
         private ColorPickerColumn colorPickerColumn2;
-        private System.Windows.Forms.DataGridView _dataGridView;
+        private System.Windows.Forms.DataGridView _debugGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn _columnSettingId;
         private System.Windows.Forms.DataGridViewTextBoxColumn _columnRegex;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isBoldDataGridViewCheckBoxColumn;
         private ColorPickerColumn foreColorDataGridViewTextBoxColumn;
         private ColorPickerColumn backColorDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource _debugSettingsBindingSource;
 
     }
 }
