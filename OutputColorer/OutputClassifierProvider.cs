@@ -18,7 +18,7 @@ namespace Talk2Bits.OutputColorer
     public class OutputClassifierProvider : IClassifierProvider
     {
         private const string DebugOutputContentType = "DebugOutput";
-        private const string BuildOutputContentType = "BuildOutput";        
+        private const string BuildOutputContentType = "BuildOutput";
 
         [Import]
         internal IClassificationTypeRegistryService ClassificationRegistry = null;
@@ -26,7 +26,7 @@ namespace Talk2Bits.OutputColorer
         [Import]
         internal SVsServiceProvider ServiceProvider = null;
 
-        private static BuildOutputClassifier _buildOutputClassifier;
+        private static OutputClassifier _buildOutputClassifier;
         private static OutputClassifier _debugOutputClassifier;        
 
         /// <summary>
@@ -38,14 +38,28 @@ namespace Talk2Bits.OutputColorer
         {
             var dte = (DTE)ServiceProvider.GetService(typeof(DTE));
             var configuration = dte.Properties["Output Colorer", "General"];
-            var buildSettings = (IEnumerable<ColorerFormatSetting>)configuration.Item("BuildOutputSettings").Value;
-            var debugSettings = (IEnumerable<ColorerFormatSetting>)configuration.Item("DebugOutputSettings").Value;            
 
             if (buffer.ContentType.IsOfType(BuildOutputContentType))
-                return _buildOutputClassifier ?? (_buildOutputClassifier = new BuildOutputClassifier(ClassificationRegistry, buildSettings));
+            {
+                if (_buildOutputClassifier == null)
+                {
+                    var settings = (IEnumerable<ColorerFormatSetting>)configuration.Item("BuildOutputSettings").Value;
+                    _buildOutputClassifier = new OutputClassifier(ClassificationRegistry, settings);
+                }
+
+                return _buildOutputClassifier;
+            }
 
             if (buffer.ContentType.IsOfType(DebugOutputContentType))
-                return _debugOutputClassifier ?? (_debugOutputClassifier = new OutputClassifier(ClassificationRegistry, debugSettings));
+            {
+                if (_debugOutputClassifier == null)
+                {
+                    var settings = (IEnumerable<ColorerFormatSetting>)configuration.Item("DebugOutputSettings").Value;
+                    _debugOutputClassifier = new OutputClassifier(ClassificationRegistry, settings);
+                }
+            
+                return _debugOutputClassifier;
+            }
 
             return null;
         }
