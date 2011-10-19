@@ -65,34 +65,6 @@ namespace Talk2Bits.OutputColorer
                                 spans.Add(new ClassificationSpan(line.Extent, type));
                         }
                     }
-
-                    //if (text.Contains("- Failed  -"))
-                    //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
-                    //else if (text.Contains("- Success -"))
-                    //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Success);
-                    //else if (Regex.IsMatch(text, @"^.+: error \w+:.+$"))
-                    //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);                    
-                    //else if (Regex.IsMatch(text, @"^.+: warning \w+:.+$"))
-                    //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Warning);
-                    //else if (Regex.IsMatch(text, @"^={10}\sBuild:.*$"))
-                    //{
-                    //    if (text.Contains(", 0 failed,"))
-                    //    {
-                    //        type = _classificationTypeRegistry.GetClassificationType(
-                    //            OutputClassifierDefinitions.Success
-                    //            );
-                    //    }
-                    //    else
-                    //    {
-                    //        type = _classificationTypeRegistry.GetClassificationType(
-                    //            OutputClassifierDefinitions.Error
-                    //            );
-                    //    }
-
-                    //}
-
-                    //if (type != null)
-                    //    spans.Add(new ClassificationSpan(line.Extent, type));
                 }
             }
             catch (Exception ex)
