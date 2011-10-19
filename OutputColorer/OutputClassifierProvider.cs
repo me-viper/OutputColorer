@@ -45,7 +45,7 @@ namespace Talk2Bits.OutputColorer
                 return _buildOutputClassifier ?? (_buildOutputClassifier = new BuildOutputClassifier(ClassificationRegistry, buildSettings));
 
             if (buffer.ContentType.IsOfType(DebugOutputContentType))
-                return _debugOutputClassifier ?? (_debugOutputClassifier = new OutputClassifier(ClassificationRegistry));
+                return _debugOutputClassifier ?? (_debugOutputClassifier = new OutputClassifier(ClassificationRegistry, debugSettings));
 
             return null;
         }

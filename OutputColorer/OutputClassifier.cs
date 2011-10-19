@@ -10,10 +10,12 @@ namespace Talk2Bits.OutputColorer
     internal sealed class OutputClassifier : IClassifier
     {
         private IClassificationTypeRegistryService _classificationTypeRegistry;
+        private IEnumerable<ColorerFormatSetting> _settings;
 
-        internal OutputClassifier(IClassificationTypeRegistryService registry)
+        internal OutputClassifier(IClassificationTypeRegistryService registry, IEnumerable<ColorerFormatSetting> settings)
         {
             _classificationTypeRegistry = registry;
+            _settings = settings;
         }
 
         /// <summary>
@@ -39,37 +41,29 @@ namespace Talk2Bits.OutputColorer
             
             try
             {
-                if (snapshot.Length == 0)
+                if(snapshot.Length == 0)
                     return spans;
+            
+                var startno = span.Start.GetContainingLine().LineNumber;
+                var endno = (span.End - 1).GetContainingLine().LineNumber;
 
-                IClassificationType type = null;
-                string text = span.GetText().TrimStart();
+                for (var i = startno; i <= endno; i++)
+                {
+                    var line = snapshot.GetLineFromLineNumber(i);
+                    var text = line.GetText();
 
-                //if (text.Contains("--- End of inner exception stack trace ---"))
-                //{
-                //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Delimiter);
-                //}
-                //else if (text.StartsWith("System.Windows.Data Error:"))
-                //{
-                //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
-                //}
-                //else if (text.StartsWith("at") || 
-                //            text.StartsWith("A first chance exception of type") || 
-                //                text.Contains("Exception:"))
-                //{
-                //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Error);
-                //}
-                //else if (Regex.IsMatch(text, "^The (?:thread|program) .+ has exited with code .+$"))
-                //{
-                //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Noise);
-                //}
-                //else if (Regex.IsMatch(text, @"^\'.+\'\s+.+: (?:Loaded|Cannot find or open the PDB file).*$"))
-                //{
-                //    type = _classificationTypeRegistry.GetClassificationType(OutputClassifierDefinitions.Noise);
-                //}                
+                    foreach (var setting in _settings)
+                    {
+                        if (Regex.IsMatch(text, setting.Regex))
+                        {
+                            var type = _classificationTypeRegistry.GetClassificationType(setting.ClassificationType);
 
-                if (type != null)
-                    spans.Add(new ClassificationSpan(span, type));
+                            if (type != null)
+                                spans.Add(new ClassificationSpan(line.Extent, type));
+                        }
+                    }
+
+                }
             }
             catch (Exception ex)
             {

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 
 using EnvDTE;
@@ -11,9 +11,9 @@ using Microsoft.VisualStudio.Utilities;
 namespace Talk2Bits.OutputColorer
 {
     [Export(typeof(IWpfTextViewCreationListener))]
-    [ContentType("BuildOutput")]
+    [ContentType("DebugOutput")]
     [TextViewRole(PredefinedTextViewRoles.Interactive)]
-    internal class OutputViewCreationListener : IWpfTextViewCreationListener
+    public class DebugOutputViewCreationListener: IWpfTextViewCreationListener
     {
         [Import]
         internal IClassificationTypeRegistryService ClassificationTypeRegistry = null;
@@ -28,11 +28,11 @@ namespace Talk2Bits.OutputColorer
         {
             var dte = (DTE)ServiceProvider.GetService(typeof(DTE));
             var configuration = dte.Properties["Output Colorer", "General"];
-            var buildSettings = (IEnumerable<ColorerFormatSetting>)configuration.Item("BuildOutputSettings").Value;
+            var debugSettings = (IEnumerable<ColorerFormatSetting>)configuration.Item("DebugOutputSettings").Value;
 
             var formatMap = ClassificaitonFormatMap.GetClassificationFormatMap(textView);
 
-            foreach (var setting in buildSettings)
+            foreach (var setting in debugSettings)
             {
                 var type = ClassificationTypeRegistry.CreateClassificationType(setting.ClassificationType, new IClassificationType[] {});
                 var format = formatMap.DefaultTextProperties

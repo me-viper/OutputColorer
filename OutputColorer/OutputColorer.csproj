@@ -85,6 +85,7 @@
     <Compile Include="Controls\ColorerFormatSettingsCollectionConverter.cs" />
     <Compile Include="Controls\ColorPickerCell.cs" />
     <Compile Include="Controls\ColorPickerColumn.cs" />
+    <Compile Include="DebugOutputViewCreationListener.cs" />
     <Compile Include="FormatInfo.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Guids.cs" />
@@ -107,6 +108,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="BuildOutputViewCreationListener.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -51,15 +51,14 @@ namespace Talk2Bits.OutputColorer
 
                 for (var i = startno; i <= endno; i++)
                 {
-                    ITextSnapshotLine line = snapshot.GetLineFromLineNumber(i);
-                    IClassificationType type = null;
-                    string text = line.GetText();
+                    var line = snapshot.GetLineFromLineNumber(i);
+                    var text = line.GetText();
 
                     foreach (var setting in _settings)
                     {
                         if (Regex.IsMatch(text, setting.Regex))
                         {
-                            type = _classificationTypeRegistry.GetClassificationType(setting.ClassificationType);
+                            var type = _classificationTypeRegistry.GetClassificationType(setting.ClassificationType);
 
                             if (type != null)
                                 spans.Add(new ClassificationSpan(line.Extent, type));
