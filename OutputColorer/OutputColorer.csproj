@@ -86,7 +86,6 @@
     <Compile Include="Controls\ColorPickerCell.cs" />
     <Compile Include="Controls\ColorPickerColumn.cs" />
     <Compile Include="DebugOutputViewCreationListener.cs" />
-    <Compile Include="FormatInfo.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Guids.cs" />
     <Compile Include="Logger.cs" />

@@ -19,15 +19,20 @@ namespace Talk2Bits.OutputColorer.Controls
 
         protected override void OnClick(DataGridViewCellEventArgs e)
         {
+            base.OnClick(e);
+
             var cd = new ColorDialog();
             cd.SolidColorOnly = false;
+            cd.FullOpen = true;
 
-            if (Value != null)
-                cd.Color = (Color)Value;
+            var value = GetValue(e.RowIndex);
+
+            if (value != null)
+                cd.Color = (Color)value;
 
             cd.ShowDialog();
 
-            Value = cd.Color;
+            SetValue(e.RowIndex, cd.Color);
         }
 
         public override Type ValueType
