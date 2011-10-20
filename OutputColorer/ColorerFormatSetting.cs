@@ -1,9 +1,6 @@
 using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.Serialization;
-
-using Talk2Bits.OutputColorer.Controls;
 
 namespace Talk2Bits.OutputColorer
 {

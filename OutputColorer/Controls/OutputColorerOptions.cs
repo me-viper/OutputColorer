@@ -23,17 +23,6 @@ namespace Talk2Bits.OutputColorer.Controls
             _debugGridView.CellBeginEdit += GridViewOnCellBeginEdit;
         }
 
-        private void GridViewOnCellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            var gridView = (DataGridView)sender;
-
-            var cell = gridView.Rows[e.RowIndex].Cells[0];
-            var bindingSource = (BindingSource)gridView.DataSource;
-
-            if (string.IsNullOrWhiteSpace(cell.Value as string))
-                ((ColorerFormatSetting)bindingSource.Current).ClassificationType = string.Format("OutputColorer.{0}", Guid.NewGuid());
-        }
-
         public OutputColorerOptionsPage OptionsPage { get; set; }
 
         public IEnumerable<ColorerFormatSetting> BuildOuptutSetting
@@ -81,7 +70,18 @@ namespace Talk2Bits.OutputColorer.Controls
             
         }
 
-        private void GridViewOnCellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        private static void GridViewOnCellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            var gridView = (DataGridView)sender;
+
+            var cell = gridView.Rows[e.RowIndex].Cells[0];
+            var bindingSource = (BindingSource)gridView.DataSource;
+
+            if (string.IsNullOrWhiteSpace(cell.Value as string))
+                ((ColorerFormatSetting)bindingSource.Current).ClassificationType = string.Format("OutputColorer.{0}", Guid.NewGuid());
+        }
+
+        private static void GridViewOnCellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             var gridView = (DataGridView)sender;
 
@@ -107,7 +107,7 @@ namespace Talk2Bits.OutputColorer.Controls
             }
         }
 
-        private void GridViewOnCellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private static void GridViewOnCellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             var gridView = (DataGridView)sender;
 
