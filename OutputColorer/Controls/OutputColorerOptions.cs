@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
+using Microsoft.VisualStudio.Shell;
+
 namespace Talk2Bits.OutputColorer.Controls
 {
     public partial class OutputColorerOptions : UserControl
@@ -64,6 +66,21 @@ namespace Talk2Bits.OutputColorer.Controls
             }
         }
 
+        public void Apply(DialogPage.ApplyKind applyKind)
+        {
+            if (applyKind != DialogPage.ApplyKind.Apply)
+            {
+                _buildGridView.CancelEdit();
+                _debugGridView.CancelEdit();
+            }
+            else
+            {
+                _buildGridView.EndEdit();
+                _debugGridView.EndEdit();
+            }
+            
+        }
+
         private void GridViewOnCellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             var gridView = (DataGridView)sender;
@@ -77,9 +94,7 @@ namespace Talk2Bits.OutputColorer.Controls
 
                 if (string.IsNullOrWhiteSpace(regex))
                 {
-                    gridView.Rows[e.RowIndex].ErrorText = "Invalid regular expression";
                     e.Cancel = true;
-
                     return;
                 }
 

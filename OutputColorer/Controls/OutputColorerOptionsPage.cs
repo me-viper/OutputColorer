@@ -29,18 +29,12 @@ namespace Talk2Bits.OutputColorer.Controls
             get { return _colorerOptions; }
         }
 
-        public override void LoadSettingsFromStorage()
+        protected override void OnApply(PageApplyEventArgs e)
         {
-            base.LoadSettingsFromStorage();
-            Console.WriteLine();
+            _colorerOptions.Apply(e.ApplyBehavior);
+            base.OnApply(e);
         }
-
-        public override void SaveSettingsToStorage()
-        {
-            base.SaveSettingsToStorage();
-            Console.WriteLine();
-        }
-
+        
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [TypeConverter(typeof(ColorerFormatSettingsCollectionConverter))]
         public Collection<ColorerFormatSetting> BuildOutputSettings
