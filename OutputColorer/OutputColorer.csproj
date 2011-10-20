@@ -80,7 +80,6 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BuildOutputClassifier.cs" />
     <Compile Include="ColorerFormatSetting.cs" />
     <Compile Include="Controls\ColorerFormatSettingsCollectionConverter.cs" />
     <Compile Include="Controls\ColorPickerCell.cs" />

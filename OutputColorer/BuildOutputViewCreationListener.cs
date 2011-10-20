@@ -24,6 +24,10 @@ namespace Talk2Bits.OutputColorer
         [Import]
         internal SVsServiceProvider ServiceProvider = null;
 
+        /// <summary>
+        /// Called when a text view having matchine roles is created over a text data model having a matching content type.
+        /// </summary>
+        /// <param name="textView">The newly created text view.</param>
         public void TextViewCreated(IWpfTextView textView)
         {
             var dte = (DTE)ServiceProvider.GetService(typeof(DTE));
