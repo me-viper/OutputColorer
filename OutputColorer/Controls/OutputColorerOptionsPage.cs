@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Xml;
 
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -60,6 +61,38 @@ namespace Talk2Bits.OutputColorer.Controls
         {
             BuildOutputSettings = GetBuildOutputDefaultConfiguration();
             DebugOutputSettings = GetDebugOutputDefaultConfiguration();
+        }
+
+        public override void SaveSettingsToXml(IVsSettingsWriter writer)
+        {
+            var typeConverter = new ColorerFormatSettingsCollectionConverter();
+
+            var buildSettings = typeConverter.ConvertTo(BuildOutputSettings, typeof(string)) as string;
+
+            if (buildSettings != null)
+                writer.WriteSettingString("BuildOutputSettings", buildSettings);
+
+            var debugSettings = typeConverter.ConvertTo(DebugOutputSettings, typeof(string)) as string;
+
+            if (debugSettings != null)
+                writer.WriteSettingString("DebugOutputSettings", debugSettings);
+        }
+
+        public override void LoadSettingsFromXml(IVsSettingsReader reader)
+        {
+            var typeConverter = new ColorerFormatSettingsCollectionConverter();
+
+            string buildSettingsString;
+            reader.ReadSettingString("BuildOutputSettings", out buildSettingsString);
+
+            if (!string.IsNullOrWhiteSpace(buildSettingsString))
+                BuildOutputSettings = (Collection<ColorerFormatSetting>)typeConverter.ConvertFrom(buildSettingsString);
+
+            string debugSettingsString;
+            reader.ReadSettingString("BuildOutputSettings", out debugSettingsString);
+
+            if (!string.IsNullOrWhiteSpace(buildSettingsString))
+                BuildOutputSettings = (Collection<ColorerFormatSetting>)typeConverter.ConvertFrom(debugSettingsString);
         }
 
         private static Collection<ColorerFormatSetting> GetBuildOutputDefaultConfiguration()
