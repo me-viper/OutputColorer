@@ -81,11 +81,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BaseOutputViewCreationListener.cs" />
+    <Compile Include="ClassificationDefinitions.cs" />
     <Compile Include="ColorerFormatSetting.cs" />
     <Compile Include="Controls\ColorerFormatSettingsCollectionConverter.cs" />
     <Compile Include="Controls\ColorPickerCell.cs" />
     <Compile Include="Controls\ColorPickerColumn.cs" />
     <Compile Include="DebugOutputViewCreationListener.cs" />
+    <Compile Include="FindResultsClassifier.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Guids.cs" />
     <Compile Include="Logger.cs" />

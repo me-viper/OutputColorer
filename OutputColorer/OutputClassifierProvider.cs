@@ -15,10 +15,12 @@ namespace Talk2Bits.OutputColorer
     /// </summary>
     [Export(typeof(IClassifierProvider))]
     [ContentType("output")]
+    [ContentType("FindResults")]
     public class OutputClassifierProvider : IClassifierProvider
     {
         private const string DebugOutputContentType = "DebugOutput";
         private const string BuildOutputContentType = "BuildOutput";
+        private const string FindResultsContentType = "FindResults";
 
         [Import]
         internal IClassificationTypeRegistryService ClassificationRegistry = null;
@@ -28,6 +30,7 @@ namespace Talk2Bits.OutputColorer
 
         private static OutputClassifier _buildOutputClassifier;
         private static OutputClassifier _debugOutputClassifier;        
+        private static IClassifier _findResultsClassifier;        
 
         /// <summary>
         /// Gets the classifier for specified text buffer.
@@ -59,6 +62,11 @@ namespace Talk2Bits.OutputColorer
                 }
             
                 return _debugOutputClassifier;
+            }
+
+            if (buffer.ContentType.IsOfType(FindResultsContentType))
+            {
+                return _findResultsClassifier ?? (_findResultsClassifier = new FindResultsClassifier(ClassificationRegistry));
             }
 
             return null;
