@@ -17,7 +17,7 @@ namespace Talk2Bits.OutputColorer
         [Export(typeof(EditorFormatDefinition))]
         [ClassificationType(ClassificationTypeNames = FindResultDefinition)]
         [Name(FindResultDefinition)]
-        [UserVisible(true)]
+        [UserVisible(false)]
         internal sealed class FindResultHightlightFormat : ClassificationFormatDefinition
         {
             public FindResultHightlightFormat()
