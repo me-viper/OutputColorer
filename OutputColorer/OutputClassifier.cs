@@ -54,7 +54,7 @@ namespace Talk2Bits.OutputColorer
 
                     foreach (var setting in _settings)
                     {
-                        if (Regex.IsMatch(text, setting.Regex))
+                        if (Regex.IsMatch(text, setting.Regex, RegexOptions.IgnoreCase))
                         {
                             var type = _classificationTypeRegistry.GetClassificationType(setting.ClassificationType);
 
