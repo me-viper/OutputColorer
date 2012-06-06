@@ -102,7 +102,7 @@ namespace Talk2Bits.OutputColorer.Controls
             buildOutputSettings.Add(
                 new ColorerFormatSetting
                     {
-                        Regex = @"^={10} (Re)?Build(\sAll)?:.*, 0 failed.*$",
+                        Regex = @"={10} (Re)?Build(\sAll)?:.*, 0 failed.*",
                         ForeColor = Color.Red,
                         BackColor = Color.White,
                         ClassificationType = "OutputColorer.BuildSucceded",
@@ -135,7 +135,7 @@ namespace Talk2Bits.OutputColorer.Controls
             buildOutputSettings.Add(
                 new ColorerFormatSetting
                     {
-                        Regex = @"^={10} (Re)?Build(\sAll)?:.*, [^0]\d? failed.*$",
+                        Regex = @"={10} (Re)?Build(\sAll)?:.*, [^0]\d? failed.*",
                         ForeColor = Color.Red,
                         BackColor = Color.White,
                         ClassificationType = "OutputColorer.BuildFailed",
@@ -146,7 +146,7 @@ namespace Talk2Bits.OutputColorer.Controls
             buildOutputSettings.Add(
                 new ColorerFormatSetting
                     {
-                        Regex = @"^-{6} (Re)?Build(\sAll)? started:",
+                        Regex = @"-{6} (Re)?Build(\sAll)? started:",
                         ForeColor = Color.Green,
                         BackColor = Color.White,
                         ClassificationType = "OutputColorer.BuildStarted",
