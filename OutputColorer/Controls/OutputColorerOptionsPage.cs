@@ -103,7 +103,7 @@ namespace Talk2Bits.OutputColorer.Controls
                 new ColorerFormatSetting
                     {
                         Regex = @"={10} (Re)?Build(\sAll)?:.*, 0 failed.*",
-                        ForeColor = Color.Red,
+                        ForeColor = Color.Green,
                         BackColor = Color.White,
                         ClassificationType = "OutputColorer.BuildSucceded",
                         IsBold = true
