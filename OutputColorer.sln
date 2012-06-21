@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutputColorer", "OutputColorer\OutputColorer.csproj", "{68A54644-CA68-4157-89D8-710412B769C0}"
 EndProject
 Global
