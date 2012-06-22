@@ -136,7 +136,7 @@ namespace Talk2Bits.OutputColorer
             }
 
             foreach (var entry in _buildSummary)
-                buildPane.OutputString(entry);
+                buildPane.OutputString(entry + Environment.NewLine);
 
             return VSConstants.S_OK;
         }
