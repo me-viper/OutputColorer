@@ -105,7 +105,7 @@ namespace Talk2Bits.OutputColorer.Controls
                         Regex = @"={10} (Re)?Build(\sAll)?:.*, 0 failed.*",
                         ForeColor = Color.Green,
                         BackColor = Color.White,
-                        ClassificationType = "OutputColorer.BuildSucceded",
+                        ClassificationType = "OutputColorer.BuildSucceeded",
                         IsBold = true
                     }
                 );
@@ -131,7 +131,7 @@ namespace Talk2Bits.OutputColorer.Controls
                         IsBold = true
                     }
                 );
-            
+
             buildOutputSettings.Add(
                 new ColorerFormatSetting
                     {
@@ -150,6 +150,28 @@ namespace Talk2Bits.OutputColorer.Controls
                         ForeColor = Color.Green,
                         BackColor = Color.White,
                         ClassificationType = "OutputColorer.BuildStarted",
+                        IsBold = true
+                    }
+                );
+
+            buildOutputSettings.Add(
+                new ColorerFormatSetting
+                    {
+                        Regex = @"-{5} Build completed: Project:.*succeeded",
+                        ForeColor = Color.Green,
+                        BackColor = Color.White,
+                        ClassificationType = "OutputColorer.BuildSucceededSummary",
+                        IsBold = true
+                    }
+                );
+
+            buildOutputSettings.Add(
+                new ColorerFormatSetting
+                    {
+                        Regex = @"-{5} Build completed: Project:.*failed",
+                        ForeColor = Color.Red,
+                        BackColor = Color.White,
+                        ClassificationType = "OutputColorer.BuildFailedSummary",
                         IsBold = true
                     }
                 );

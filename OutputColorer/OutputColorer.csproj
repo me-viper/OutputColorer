@@ -124,7 +124,9 @@
     <Compile Include="Controls\OutputColorerOptions.Designer.cs">
       <DependentUpon>OutputColorerOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OutputColorerOptionsPage.cs" />
+    <Compile Include="Controls\OutputColorerOptionsPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ProvideBindingPathAttribute.cs" />
     <Compile Include="Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
