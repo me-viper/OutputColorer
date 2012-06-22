@@ -4,58 +4,6 @@
         <name>Talk2Bits.OutputColorer</name>
     </assembly>
     <members>
-        <member name="T:Microsoft.VisualStudio.Shell.ProvideBindingPathAttribute">
-            <summary>
-            This attribute registers a path that should be probed for candidate assemblies at assembly load time.
-            
-            For example:
-              [...\VisualStudio\10.0\BindingPaths\{5C48C732-5C7F-40f0-87A7-05C4F15BC8C3}]
-                "$PackageFolder$"=""
-                
-            This would register the "PackageFolder" (i.e. the location of the pkgdef file) as a directory to be probed
-            for assemblies to load.
-            </summary>
-        </member>
-        <member name="P:Microsoft.VisualStudio.Shell.ProvideBindingPathAttribute.SubPath">
-            <summary>
-            An optional SubPath to set after $PackageFolder$. This should be used
-            if the assemblies to be probed reside in a different directory than
-            the pkgdef file.
-            </summary>
-        </member>
-        <member name="F:Talk2Bits.OutputColorer.Controls.OutputColorerOptions.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:Talk2Bits.OutputColorer.Controls.OutputColorerOptions.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:Talk2Bits.OutputColorer.Controls.OutputColorerOptions.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:Talk2Bits.OutputColorer.Resources">
-            <summary>
-              A strongly-typed resource class, for looking up localized strings, etc.
-            </summary>
-        </member>
-        <member name="P:Talk2Bits.OutputColorer.Resources.ResourceManager">
-            <summary>
-              Returns the cached ResourceManager instance used by this class.
-            </summary>
-        </member>
-        <member name="P:Talk2Bits.OutputColorer.Resources.Culture">
-            <summary>
-              Overrides the current thread's CurrentUICulture property for all
-              resource lookups using this strongly typed resource class.
-            </summary>
-        </member>
         <member name="M:Talk2Bits.OutputColorer.OutputClassifier.GetClassificationSpans(Microsoft.VisualStudio.Text.SnapshotSpan)">
             <summary>
             Classify debug output spans.
@@ -110,6 +58,58 @@
             <summary>
             Initialization of the package; this method is called right after the package is sited, so this is the place
             where you can put all the initilaization code that rely on services provided by VisualStudio.
+            </summary>
+        </member>
+        <member name="F:Talk2Bits.OutputColorer.Controls.OutputColorerOptions.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Talk2Bits.OutputColorer.Controls.OutputColorerOptions.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Talk2Bits.OutputColorer.Controls.OutputColorerOptions.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Shell.ProvideBindingPathAttribute">
+            <summary>
+            This attribute registers a path that should be probed for candidate assemblies at assembly load time.
+            
+            For example:
+              [...\VisualStudio\10.0\BindingPaths\{5C48C732-5C7F-40f0-87A7-05C4F15BC8C3}]
+                "$PackageFolder$"=""
+                
+            This would register the "PackageFolder" (i.e. the location of the pkgdef file) as a directory to be probed
+            for assemblies to load.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Shell.ProvideBindingPathAttribute.SubPath">
+            <summary>
+            An optional SubPath to set after $PackageFolder$. This should be used
+            if the assemblies to be probed reside in a different directory than
+            the pkgdef file.
+            </summary>
+        </member>
+        <member name="T:Talk2Bits.OutputColorer.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Talk2Bits.OutputColorer.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Talk2Bits.OutputColorer.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
             </summary>
         </member>
     </members>
